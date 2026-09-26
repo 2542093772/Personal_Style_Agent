@@ -26,7 +26,7 @@ schedule:
   source: none
 
 delivery:
-  channel: auto
+  channel: telegram
   supported_channels:
     - feishu
     - wecom
