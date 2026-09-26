@@ -8,6 +8,7 @@ MARKET_DOMAINS = {
     "tmall": "tmall.com",
     "taobao": "taobao.com",
     "dewu": "dewu.com",
+    "pinduoduo": "yangkeduo.com",
 }
 
 
@@ -37,4 +38,6 @@ def build_marketplace_search_url(query, marketplace):
         return f"https://s.taobao.com/search?q={encoded}"
     if marketplace == "tmall":
         return f"https://list.tmall.com/search_product.htm?q={encoded}"
+    if marketplace == "pinduoduo":
+        return f"https://mobile.yangkeduo.com/search_result.html?search_key={encoded}"
     return ""

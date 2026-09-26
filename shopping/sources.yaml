@@ -1,21 +1,16 @@
 markets:
-  jd:
-    enabled: true
-    weight: 0.95
-  tmall:
-    enabled: true
-    weight: 0.95
   taobao:
     enabled: true
+    weight: 0.90
+  pinduoduo:
+    enabled: true
     weight: 0.80
-  brand_official:
-    enabled: true
-    weight: 1.00
-  dewu:
-    enabled: true
-    weight: 0.75
 
 policy:
+  preferred_markets:
+    - taobao
+    - pinduoduo
+  avoid_other_marketplaces_in_user_facing_links: true
   prefer_official_or_authorized: true
   avoid_unknown_sellers_when_possible: true
   require_live_url: true
