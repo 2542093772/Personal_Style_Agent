@@ -12,7 +12,11 @@
     .k{color:#aaa;font-size:13px}.v{font-size:24px;font-weight:700;margin-top:6px}
     .small{font-size:14px;color:#bbb}
     a{color:#9ecbff}
-    ul{padding-left:18px}
+    .rules{display:grid;gap:12px;margin-top:12px}
+    .rule{background:#171717;border:1px solid #303030;border-radius:12px;padding:14px}
+    .rule-title{font-weight:700;font-size:17px}
+    .meta{font-size:12px;color:#999;margin-top:6px}
+    .reason{margin-top:8px;color:#ccc;line-height:1.5}
     .empty{color:#888}
   </style>
 </head>
@@ -20,14 +24,25 @@
 <div class="wrap">
   <p><a href="/">← 返回摄像头</a></p>
   <h1>个人视觉档案</h1>
-  <p class="small">这里展示 Agent 当前对你的稳定视觉认知。数据来自你主动开启的持续视觉采集。</p>
+  <p class="small">这里展示 Agent 当前对你的稳定视觉认知，以及由这些特征推导出的个性化穿搭规则。</p>
   <div id="summary" class="grid"></div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="k">个性化穿搭规则</div>
+    <div id="rules" class="rules"></div>
+  </div>
+
   <div class="card" style="margin-top:16px">
     <div class="k">最近观察</div>
     <pre id="latest" style="white-space:pre-wrap;word-break:break-word"></pre>
   </div>
 </div>
 <script>
+function pct(v){
+  const n = Number(v);
+  if (!Number.isFinite(n)) return '暂无';
+  return Math.round(n * 100) + '%';
+}
 async function loadProfile(){
   const res = await fetch('/profile-data');
   const data = await res.json();
@@ -45,6 +60,18 @@ async function loadProfile(){
   document.getElementById('summary').innerHTML = items.map(([k,v]) => `
     <div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>
   `).join('');
+
+  const rules = (data.visual_style_rules || {}).rules || [];
+  document.getElementById('rules').innerHTML = rules.length
+    ? rules.map(r => `
+        <div class="rule">
+          <div class="rule-title">${r.title}</div>
+          <div class="reason">${r.rationale}</div>
+          <div class="meta">适用：${(r.applies_to || []).join(' / ') || '通用'} ｜ 置信度：${pct(r.confidence)} ｜ 优先级：${r.priority ?? '-'}</div>
+        </div>
+      `).join('')
+    : '<div class="empty">样本还不足，继续采集后会自动生成规则。</div>';
+
   document.getElementById('latest').textContent = JSON.stringify(data.latest || {}, null, 2);
 }
 loadProfile().catch(()=>{
