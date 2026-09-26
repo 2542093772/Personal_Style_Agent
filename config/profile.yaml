@@ -1,0 +1,23 @@
+name: ""
+sex: male
+age: null
+height_cm: null
+weight_kg: null
+body_shape: ""
+face_shape: ""
+skin_tone: ""
+hair:
+  length: ""
+  texture: ""
+  current_style: ""
+goals:
+  - clean
+  - youthful
+  - sharp
+avoid:
+  - looks_older
+  - looks_heavier
+  - greasy
+  - top_heavy
+budget:
+  monthly_cny: null
