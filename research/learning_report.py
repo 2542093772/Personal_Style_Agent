@@ -83,3 +83,33 @@ def render_learning_survey_md(report: Dict[str, Any]) -> str:
         "- 候选规则需要后续复核和个人反馈后才进入长期规则。",
     ]
     return "\n".join(lines) + "\n"
+
+
+def render_learning_push_summary(report: Dict[str, Any]) -> str:
+    lines = [
+        "# 今日学习调查摘要",
+        f"检索主题：{report.get('query_count', 0)} ｜ 有效来源：{report.get('source_count', 0)} ｜ 候选规则：{len(report.get('candidate_rules', []) or [])}",
+        "",
+    ]
+    sources = report.get("sources", []) or []
+    if sources:
+        lines.append("重点来源：")
+        for row in sources[:5]:
+            title = row.get("title") or "未命名来源"
+            lines.append(f"- {title}")
+    else:
+        lines.append("今日暂无有效公开来源。")
+
+    rules = report.get("candidate_rules", []) or []
+    if rules:
+        lines.append("")
+        lines.append("今日候选方向：")
+        for rule in rules[:4]:
+            if isinstance(rule, dict):
+                name = rule.get("title") or rule.get("rule_type") or rule.get("rule") or "候选规则"
+                evidence = rule.get("evidence_count")
+                suffix = f"（证据 {evidence}）" if evidence is not None else ""
+                lines.append(f"- {name}{suffix}")
+
+    lines += ["", "完整报告已保存到 reports/daily_learning_survey.md"]
+    return "\n".join(lines)
