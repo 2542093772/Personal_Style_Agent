@@ -21,7 +21,6 @@ from shopping.ideal_wardrobe import build_purchase_advice
 from shopping.shopping_briefing import render_purchase_advice
 from reports.daily_report import build_today_report_file
 from notifications.telegram_document import send_document
-from runtime.daily_runtime import build_runtime_bundle
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -76,20 +75,21 @@ def _weather_from_config():
 
 
 def command_today():
-    bundle = build_runtime_bundle()
-    return render_daily_briefing(bundle["plan"])
+    plan = _json("reports/daily_life_plan.json", {})
+    if not plan:
+        return "今日日报还没生成。系统会在每天 07:45 自动推送；凌晨 02:30 会先完成学习。"
+    return render_daily_briefing(plan)
 
 
 def command_report():
-    bundle = build_runtime_bundle()
-    survey = bundle["survey"]
-    plan = bundle["plan"]
-    report_path = build_today_report_file(plan, survey)
+    report_path = ROOT / "reports" / "daily_style_report.html"
+    if not report_path.exists():
+        return "今日日报还没生成。系统会在每天 07:45 自动生成并推送。"
     send_document(
-        report_path,
+        str(report_path),
         caption="今日穿搭与学习报告｜完整方案 + 学习调查 + 采购链接",
     )
-    return "完整日报已作为附件发送。"
+    return "已发送今天预先生成的完整日报。"
 
 
 def command_wardrobe():
