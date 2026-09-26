@@ -7,7 +7,6 @@ from flask import Flask, Response, jsonify, request
 
 from reports.daily_report import render_daily_html
 from life.daily_planner import build_daily_plan
-from runtime.daily_runtime import build_runtime_bundle
 
 from telegram_bot.bot import (
     ALLOWED_CHAT_ID,
@@ -99,11 +98,15 @@ def health():
 
 @app.get("/report/today")
 def report_today():
-    bundle = build_runtime_bundle()
-    return Response(
-        render_daily_html(bundle["plan"], bundle["survey"]),
-        mimetype="text/html",
-    )
+    report_path = os.path.join("reports", "daily_style_report.html")
+    if not os.path.exists(report_path):
+        return Response(
+            "<h2>今日日报尚未生成</h2><p>系统会在每天 07:45 自动生成并推送。</p>",
+            status=404,
+            mimetype="text/html",
+        )
+    with open(report_path, "r", encoding="utf-8") as fh:
+        return Response(fh.read(), mimetype="text/html")
 
 
 @app.post("/telegram/webhook")
