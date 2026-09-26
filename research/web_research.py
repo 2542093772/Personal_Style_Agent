@@ -41,10 +41,6 @@ def collect_creator_signals(max_creators=None):
         creators = creators[:max_creators]
 
     collected = []
-
-    # Fixed creator-learning track: this gives the agent stable reference objects
-    # instead of relying only on generic trend searches.
-    collected.extend(collect_creator_signals())
     for creator in creators:
         for query in creator.get("search_queries", [])[:3]:
             try:
@@ -69,6 +65,9 @@ def collect_daily_signals():
     cfg = load_config()
     queries = cfg.get("queries", [])
     collected = []
+
+    # Stable creator-learning track first, then broad trend discovery.
+    collected.extend(collect_creator_signals())
 
     for query in queries:
         try:
