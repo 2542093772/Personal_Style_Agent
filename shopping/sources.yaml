@@ -1,0 +1,32 @@
+markets:
+  jd:
+    enabled: true
+    weight: 0.95
+  tmall:
+    enabled: true
+    weight: 0.95
+  taobao:
+    enabled: true
+    weight: 0.80
+  brand_official:
+    enabled: true
+    weight: 1.00
+  dewu:
+    enabled: true
+    weight: 0.75
+
+policy:
+  prefer_official_or_authorized: true
+  avoid_unknown_sellers_when_possible: true
+  require_live_url: true
+  require_price_timestamp: true
+  do_not_rank_by_commission: true
+  do_not_recommend_only_because_popular: true
+
+scoring_weights:
+  personal_fit: 0.35
+  style_fit: 0.20
+  wardrobe_gap: 0.15
+  quality_value: 0.15
+  seller_reliability: 0.10
+  trend_relevance: 0.05
