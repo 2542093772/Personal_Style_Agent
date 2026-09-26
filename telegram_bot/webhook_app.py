@@ -2,6 +2,7 @@ import json
 import os
 import urllib.parse
 import urllib.request
+import threading
 
 from flask import Flask, Response, jsonify, request
 
@@ -20,6 +21,7 @@ from telegram_bot.bot import (
     send_message,
 )
 from life.location_state import detect_location_update, update_default_location
+from runtime.manual_trigger import manual_refresh_needed, deliver_refresh_result
 
 app = Flask(__name__)
 
@@ -148,9 +150,48 @@ def telegram_webhook():
     if ALLOWED_CHAT_ID and chat_id != ALLOWED_CHAT_ID:
         return jsonify({"ok": True, "ignored": "unauthorized_chat"})
 
-    reply = _reply_for(message.get("text", ""))
+    text = message.get("text", "")
+    command = text.split()[0].split("@")[0].lower() if text else ""
+
+    # Location updates must happen first so a new place invalidates today's manual cache.
+    if command == "/location" or (command not in {"/start", "/help", "/today", "/report", "/wardrobe", "/shop"} and detect_location_update(text)):
+        reply = _reply_for(text)
+        send_message(chat_id, reply)
+
+        if detect_location_update(text):
+            send_message(chat_id, "位置已更新，正在按新地点即时刷新今天的方案。")
+            threading.Thread(
+                target=deliver_refresh_result,
+                args=(chat_id, "today"),
+                daemon=True,
+            ).start()
+        return jsonify({"ok": True, "triggered_refresh": True})
+
+    manual_commands = {"/today": "today", "/report": "report", "/shop": "shop"}
+    if command in manual_commands and manual_refresh_needed():
+        send_message(chat_id, "收到，正在即时刷新今天的数据和方案；完成后我会直接发给你。")
+        threading.Thread(
+            target=deliver_refresh_result,
+            args=(chat_id, manual_commands[command]),
+            daemon=True,
+        ).start()
+        return jsonify({"ok": True, "triggered_refresh": True})
+
+    # A normal human message also counts as today's first manual request.
+    # This lets phrases such as “今天穿什么” trigger preparation without requiring a slash command.
+    known_commands = {"/start", "/help", "/today", "/report", "/wardrobe", "/shop", "/location"}
+    if text and command not in known_commands and manual_refresh_needed():
+        send_message(chat_id, "收到你的当日需求，我先即时刷新今天的数据和方案，完成后直接发给你。")
+        threading.Thread(
+            target=deliver_refresh_result,
+            args=(chat_id, "today"),
+            daemon=True,
+        ).start()
+        return jsonify({"ok": True, "triggered_refresh": True})
+
+    reply = _reply_for(text)
     send_message(chat_id, reply)
-    return jsonify({"ok": True})
+    return jsonify({"ok": True, "triggered_refresh": False})
 
 
 @app.post("/admin/register-webhook")
