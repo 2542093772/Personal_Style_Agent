@@ -1,0 +1,44 @@
+timezone: Asia/Shanghai
+
+daily_light_learning:
+  enabled: true
+  local_time: "07:30"
+  scope:
+    - trend_signals
+    - creator_updates
+    - celebrity_style_signals
+  writes_to:
+    - knowledge/current_trends.json
+    - knowledge/candidate_rules.json
+  promote_to_personal_rules: false
+
+weekly_review:
+  enabled: true
+  weekday: Sunday
+  local_time: "20:30"
+  scope:
+    - summarize_daily_signals
+    - score_sources
+    - deduplicate_rules
+    - cross_check_trends
+    - refresh_creator_reliability
+    - refresh_celebrity_archetypes
+  writes_to:
+    - reports/weekly_style_report.json
+    - knowledge/candidate_rules.json
+  promote_to_personal_rules: false
+
+monthly_personal_review:
+  enabled: true
+  day_of_month: 1
+  local_time: "21:00"
+  scope:
+    - review_personal_feedback
+    - review_outfit_history
+    - compare_candidate_rules
+    - update_personal_rule_weights
+    - retire_low_value_rules
+  writes_to:
+    - reports/monthly_personal_review.json
+    - personal/learned_rules.json
+  promote_to_personal_rules: true
