@@ -21,6 +21,7 @@ from shopping.ideal_wardrobe import build_purchase_advice
 from shopping.shopping_briefing import render_purchase_advice
 from reports.daily_report import build_today_report_file
 from notifications.telegram_document import send_document
+from life.location_state import detect_location_update, get_location_state, update_default_location
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -113,6 +114,11 @@ def command_shop():
     return render_purchase_advice(advice)
 
 
+def command_location():
+    state = get_location_state()
+    return f"当前默认地点：{state.get('display_name') or state.get('default_location') or '苏州'}"
+
+
 def command_help():
     return (
         "可用命令：\n"
@@ -120,6 +126,7 @@ def command_help():
         "/report - 今日学习调查摘要\n"
         "/wardrobe - 当前衣柜状态\n"
         "/shop - 当前最值得补的单品与购买链接\n"
+        "/location - 查看默认地点；也可用 /location 上海 更新\n"
         "/help - 查看命令"
     )
 
@@ -146,8 +153,26 @@ def handle_message(message):
         reply = command_wardrobe()
     elif command == "/shop":
         reply = command_shop()
+    elif command == "/location":
+        resolved = detect_location_update(text)
+        if resolved:
+            result = update_default_location(resolved, source_text=text)
+            state = result["state"]
+            persisted = result["persistence"].get("ok")
+            suffix = "，并已同步为后续日报默认地点。" if persisted else "。当前云实例已更新；要跨部署长期保存还需配置 GitHub 位置同步令牌。"
+            reply = f"默认地点已更新为：{state.get('display_name')}{suffix}"
+        else:
+            reply = command_location()
     else:
-        reply = "我目前先支持固定命令。\n\n" + command_help()
+        resolved = detect_location_update(text)
+        if resolved:
+            result = update_default_location(resolved, source_text=text)
+            state = result["state"]
+            persisted = result["persistence"].get("ok")
+            suffix = "，并已同步为后续日报默认地点。" if persisted else "。当前云实例已更新；要跨部署长期保存还需配置 GitHub 位置同步令牌。"
+            reply = f"识别到你的位置变化，默认地点已更新为：{state.get('display_name')}{suffix}"
+        else:
+            reply = "我目前先支持固定命令。\n\n" + command_help()
 
     send_message(chat_id, reply)
 
