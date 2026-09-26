@@ -1,6 +1,11 @@
 {
-  "default_location": "Suzhou",
-  "display_name": "苏州",
-  "source": "default",
-  "updated_at_utc": null
+  "default_location": "铁岭",
+  "display_name": "铁岭",
+  "admin1": "黑龙江",
+  "country": "中国",
+  "latitude": 44.59153,
+  "longitude": 129.67776,
+  "source": "telegram_message",
+  "source_text": "/location 铁岭",
+  "updated_at_utc": "2026-09-26T17:00:17.421136+00:00"
 }
