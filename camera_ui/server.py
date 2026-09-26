@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 
 from vision.style_vision import analyze_frame as run_style_vision
 from vision.profile_extractor import extract_visual_profile
-from vision.profile_merge import merge_visual_profile
+from vision.profile_collector import append_profile_observation
 
 app = Flask(__name__, static_folder=".")
 
@@ -62,7 +62,7 @@ def analyze_profile():
             frame.mimetype or "image/jpeg",
         )
         if result.get("ok"):
-            result["merged_profile"] = merge_visual_profile(result["profile"])
+            result["merged_profile"] = append_profile_observation(result["profile"])
         result["received_bytes"] = len(payload)
         result["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
         return jsonify(result)
