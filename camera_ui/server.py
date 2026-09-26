@@ -1,6 +1,13 @@
 from flask import Flask, jsonify, request, send_from_directory
 from pathlib import Path
 from datetime import datetime, timezone
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from vision.style_vision import analyze_frame as run_style_vision
 
 app = Flask(__name__, static_folder=".")
 
@@ -20,17 +27,21 @@ def analyze_frame():
     frame = request.files["frame"]
     payload = frame.read()
 
-    # Placeholder analysis endpoint.
-    # Next step: connect this endpoint to the vision/style analysis pipeline.
-    return jsonify({
-        "ok": True,
-        "received_bytes": len(payload),
-        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-        "analysis": {
-            "status": "vision_backend_not_connected_yet",
-            "message": "Frame received. Visual outfit analysis backend will be connected in the next iteration."
-        }
-    })
+    try:
+        result = run_style_vision(
+            payload,
+            frame.mimetype or "image/jpeg",
+        )
+        result["received_bytes"] = len(payload)
+        result["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
+        return jsonify(result)
+    except Exception as exc:
+        return jsonify({
+            "ok": False,
+            "error": str(exc),
+            "received_bytes": len(payload),
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        }), 500
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8765, debug=False)
