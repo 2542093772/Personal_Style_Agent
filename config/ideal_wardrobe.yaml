@@ -1,0 +1,75 @@
+version: 1
+strategy: build_from_near_empty_wardrobe
+goals:
+  - clean
+  - youthful
+  - sharp
+avoid:
+  - looks_older
+  - looks_heavier
+  - greasy
+  - top_heavy
+
+priorities:
+  - id: P0-01
+    category: bottom
+    item: 深灰中高腰直筒长裤
+    priority: P0
+    target_count: 1
+    search_query: 男 深灰 中高腰 直筒 西裤 垂感
+    fit_notes:
+      - 中高腰
+      - 直筒或轻微宽松
+      - 裤线干净
+      - 避免低腰和过度堆叠
+    why: 高复用率，能作为大多数通勤与日常搭配的下装基底。
+    estimated_outfits: 8
+  - id: P0-02
+    category: top
+    item: 白色/米白高克重基础T恤
+    priority: P0
+    target_count: 2
+    search_query: 男 白色 米白 高克重 基础T恤 短袖
+    fit_notes:
+      - 肩线自然
+      - 衣长不过长
+      - 领口干净
+      - 面料有一定挺度
+    why: 作为内搭和单穿都高频，能降低搭配复杂度。
+    estimated_outfits: 10
+  - id: P0-03
+    category: shoes
+    item: 白/灰低帮简洁运动鞋
+    priority: P0
+    target_count: 1
+    search_query: 男 白色 灰色 低帮 简洁 运动鞋
+    fit_notes:
+      - 鞋型不要过度厚重
+      - 鞋面配色克制
+      - 优先低帮
+    why: 覆盖日常、通勤休闲和多数基础穿搭。
+    estimated_outfits: 9
+  - id: P1-01
+    category: outerwear
+    item: 黑色或深灰短款夹克
+    priority: P1
+    target_count: 1
+    search_query: 男 黑色 深灰 短款 夹克 简洁
+    fit_notes:
+      - 衣长不过臀
+      - 肩部不要额外膨胀
+      - 版型利落
+    why: 用于建立更年轻、利落的上身轮廓。
+    estimated_outfits: 7
+  - id: P1-02
+    category: top
+    item: 灰色细针织/长袖打底
+    priority: P1
+    target_count: 1
+    search_query: 男 灰色 细针织 长袖 打底 简洁
+    fit_notes:
+      - 厚度适中
+      - 贴合但不紧绷
+      - 领型简洁
+    why: 秋冬叠穿和单穿都稳定，适合作为中性色过渡层。
+    estimated_outfits: 6

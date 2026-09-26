@@ -50,6 +50,22 @@ def render_daily_briefing(plan: Dict[str, Any]) -> str:
     else:
         lines.append("- 暂无稳定视觉规则。")
 
+    purchase = plan.get("optional_purchase_gap", {}) or {}
+    purchase_items = purchase.get("items", []) or []
+    lines += ["", "## 当前最值得补的单品"]
+    if purchase_items:
+        for item in purchase_items[:2]:
+            lines.append(f"- {item.get('priority')}: {item.get('item')}")
+            if item.get("why"):
+                lines.append(f"  原因：{item.get('why')}")
+            links = item.get("marketplace_links", {}) or {}
+            first_link = next((u for u in links.values() if u), "")
+            if first_link:
+                lines.append(f"  购买搜索：{first_link}")
+        lines.append("- 更多候选可在 Telegram 输入 /shop")
+    else:
+        lines.append("- 当前暂无核心采购缺口。")
+
     lines += ["", "## 今日提醒"]
     reminders = plan.get("useful_reminders", [])
     if reminders:

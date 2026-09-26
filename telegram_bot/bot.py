@@ -17,6 +17,8 @@ from life.daily_planner import build_daily_plan
 from life.daily_briefing import render_daily_briefing
 from research.learning_report import render_learning_push_summary
 from life.weather_open_meteo import get_today_weather
+from shopping.ideal_wardrobe import build_purchase_advice
+from shopping.shopping_briefing import render_purchase_advice
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -99,12 +101,18 @@ def command_wardrobe():
     return "\n".join(lines)
 
 
+def command_shop():
+    advice = build_purchase_advice(include_live_links=True, limit=3)
+    return render_purchase_advice(advice)
+
+
 def command_help():
     return (
         "可用命令：\n"
         "/today - 今天的穿搭与生活方案\n"
         "/report - 今日学习调查摘要\n"
         "/wardrobe - 当前衣柜状态\n"
+        "/shop - 当前最值得补的单品与购买链接\n"
         "/help - 查看命令"
     )
 
@@ -129,6 +137,8 @@ def handle_message(message):
         reply = command_report()
     elif command == "/wardrobe":
         reply = command_wardrobe()
+    elif command == "/shop":
+        reply = command_shop()
     else:
         reply = "我目前先支持固定命令。\n\n" + command_help()
 

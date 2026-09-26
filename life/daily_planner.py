@@ -5,6 +5,7 @@ from typing import Any, Dict, List
 
 import yaml
 from life.outfit_recommender import build_outfit_recommendations
+from shopping.ideal_wardrobe import build_purchase_advice
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -72,6 +73,8 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
         top_rules,
     )
 
+    purchase_advice = build_purchase_advice(include_live_links=False, limit=3)
+
     plan = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "assistant_mode": "daily_life_assistant",
@@ -110,8 +113,9 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
         },
         "useful_reminders": [],
         "optional_purchase_gap": {
-            "should_buy": False,
-            "reason": "No purchase recommendation is made unless a real wardrobe gap is identified.",
+            "should_buy": bool(purchase_advice),
+            "reason": "Current wardrobe is sparse; recommendations are generated only for identified capsule-wardrobe gaps." if purchase_advice else "No core wardrobe gap identified.",
+            "items": purchase_advice,
         },
     }
 

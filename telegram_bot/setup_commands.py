@@ -16,6 +16,7 @@ commands = [
     {"command": "today", "description": "查看今天的穿搭与生活方案"},
     {"command": "report", "description": "查看今日学习调查摘要"},
     {"command": "wardrobe", "description": "查看当前衣柜状态"},
+    {"command": "shop", "description": "查看最值得补的单品与购买链接"},
     {"command": "help", "description": "查看可用命令"},
 ]
 
