@@ -9,6 +9,7 @@ import yaml
 from curator.trend_curator import build_candidates
 from life.daily_planner import build_daily_plan
 from life.weather_open_meteo import get_today_weather
+from life.location_state import get_default_location
 from research.learning_report import build_learning_survey
 from research.web_research import collect_daily_signals
 
@@ -69,12 +70,7 @@ def ensure_learning(force: bool = False) -> Dict[str, Any]:
 
 
 def resolve_location() -> str:
-    env_location = os.getenv("LIFE_ASSISTANT_LOCATION", "").strip()
-    if env_location:
-        return env_location
-
-    cfg = _yaml(ROOT / "config" / "daily_assistant.yaml", {})
-    return str(((cfg.get("weather") or {}).get("location") or "")).strip()
+    return get_default_location()
 
 
 def ensure_weather() -> Dict[str, Any] | None:
