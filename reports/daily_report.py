@@ -61,16 +61,29 @@ def render_daily_html(plan: Dict[str, Any], survey: Dict[str, Any] | None = None
     # Purchase
     purchase_html = []
     for item in purchase[:4]:
-        links = item.get("marketplace_links", {}) or {}
-        buttons = "".join(_button(name, url) for name, url in links.items() if url)
+        candidates = item.get("live_candidates", []) or []
+        candidate_html = []
+        for cand in candidates[:4]:
+            platform = "淘宝" if cand.get("marketplace") == "taobao" else "拼多多"
+            price = cand.get("price_seen")
+            price_text = f" · 抓取价约 ¥{_esc(price)}" if price else ""
+            candidate_html.append(
+                "<div class='product'>"
+                f"<div><b>{_esc(platform)}｜{_esc(cand.get('title') or '商品候选')}</b>{price_text}</div>"
+                f"<div class='muted'>抓取时间：{_esc(cand.get('captured_at'))}</div>"
+                f"<div class='buttons'>{_button('打开具体商品', cand.get('url') or '')}</div>"
+                "</div>"
+            )
+        if not candidate_html:
+            candidate_html.append("<p class='muted'>本轮未抓到可靠的淘宝/拼多多具体商品详情页，因此不展示泛搜索链接。</p>")
         purchase_html.append(
             "<div class='item'>"
             f"<div class='tag'>{_esc(item.get('priority'))}</div>"
             f"<h3>{_esc(item.get('item'))}</h3>"
             f"<p>{_esc(item.get('why'))}</p>"
             f"<p class='muted'>预计可覆盖约 {_esc(item.get('estimated_outfits'))} 套搭配</p>"
-            f"<div class='buttons'>{buttons}</div>"
-            "</div>"
+            + "".join(candidate_html)
+            + "</div>"
         )
     cards.append("<section><h2>采购建议</h2>" + ("".join(purchase_html) if purchase_html else "<p class='muted'>当前暂无核心采购缺口。</p>") + "</section>")
 
@@ -111,7 +124,7 @@ body{{margin:0;background:#f4f5f7;color:#171717;font-family:-apple-system,BlinkM
 section{{background:#fff;border-radius:18px;padding:22px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}}
 h2{{margin-top:0}} .item{{padding:14px 0;border-bottom:1px solid #eee}} .item:last-child{{border-bottom:0}}
 .muted{{color:#6b7280;font-size:14px}} .tag{{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;font-size:12px}}
-.buttons{{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}} .btn{{text-decoration:none;background:#111827;color:white;padding:8px 12px;border-radius:10px}}
+.product{padding:12px 0;border-top:1px dashed #e5e7eb}.buttons{{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}} .btn{{text-decoration:none;background:#111827;color:white;padding:8px 12px;border-radius:10px}}
 a{{color:#2563eb}}
 </style>
 </head>
