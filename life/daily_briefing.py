@@ -3,8 +3,9 @@ from typing import Dict, Any
 
 def render_daily_briefing(plan: Dict[str, Any]) -> str:
     ctx = plan.get("today_context", {})
-    wardrobe = plan.get("wardrobe", {})
     outfit = plan.get("outfit_plan", {})
+    internet = outfit.get("internet_recommendation", []) or []
+    wardrobe = outfit.get("wardrobe_recommendation", {}) or {}
     rules = plan.get("personal_baseline", {}).get("top_visual_rules", [])
 
     lines = ["# 今日生活方案", ""]
@@ -12,25 +13,42 @@ def render_daily_briefing(plan: Dict[str, Any]) -> str:
     weather = ctx.get("weather")
     schedule = ctx.get("schedule")
     if weather:
-        lines += [f"天气：{weather}"]
+        lines.append(f"天气：{weather}")
     if schedule:
-        lines += [f"日程：{schedule}"]
+        lines.append(f"日程：{schedule}")
     if weather or schedule:
         lines.append("")
 
-    lines += ["## 今日穿搭原则"]
-    if rules:
-        for r in rules[:5]:
-            lines.append(f"- {r.get('title')}: {r.get('rationale')}")
+    lines += ["## 互联网学习后的建议穿搭"]
+    if internet:
+        for idx, item in enumerate(internet[:3], 1):
+            lines.append(f"{idx}. {item.get('title', '建议方案')}")
+            formula = item.get("formula") or []
+            if formula:
+                lines.append("   组合：" + " + ".join(map(str, formula)))
+            if item.get("reason"):
+                lines.append(f"   原因：{item.get('reason')}")
+            if item.get("evidence_count") is not None:
+                lines.append(f"   学习证据数：{item.get('evidence_count')}")
     else:
-        lines.append("- 继续沿用当前基础偏好；个人档案规则尚不足。")
+        lines.append("- 今日暂无足够的互联网学习信号形成可靠方案。")
 
-    lines += ["", "## 衣柜状态"]
-    lines.append(f"- 已录入单品：{wardrobe.get('item_count', 0)}")
-    if outfit.get("status") == "needs_wardrobe_items":
-        lines.append("- 当前衣柜数据为空，今天暂不编造具体单品搭配。")
+    lines += ["", "## 你现有衣柜今天可直接穿"]
+    items = wardrobe.get("items", []) or []
+    if items:
+        for item in items:
+            lines.append(f"- {item.get('category')}: {item.get('name')}")
+        if wardrobe.get("reason"):
+            lines.append(f"- 选择逻辑：{wardrobe.get('reason')}")
     else:
-        lines.append("- 衣柜已可用于后续自动选款与组合评分。")
+        lines.append(f"- {wardrobe.get('reason', '衣柜数据不足，暂不编造具体单品。')}")
+
+    lines += ["", "## 个人比例规则"]
+    if rules:
+        for r in rules[:4]:
+            lines.append(f"- {r.get('title')}")
+    else:
+        lines.append("- 暂无稳定视觉规则。")
 
     lines += ["", "## 今日提醒"]
     reminders = plan.get("useful_reminders", [])
