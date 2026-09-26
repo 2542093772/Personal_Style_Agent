@@ -8,8 +8,8 @@ import yaml
 
 from curator.trend_curator import build_candidates
 from life.daily_planner import build_daily_plan
-from life.weather_open_meteo import get_today_weather
-from life.location_state import get_default_location
+from life.weather_open_meteo import get_today_weather, get_today_weather_by_coordinates
+from life.location_state import get_default_location, get_location_state
 from research.learning_report import build_learning_survey
 from research.web_research import collect_daily_signals
 
@@ -77,7 +77,16 @@ def ensure_weather() -> Dict[str, Any] | None:
     location = resolve_location()
     if not location:
         return None
+    state = get_location_state()
     try:
+        if state.get("latitude") is not None and state.get("longitude") is not None:
+            return get_today_weather_by_coordinates(
+                state["latitude"],
+                state["longitude"],
+                location=state.get("display_name") or location,
+                admin1=state.get("admin1"),
+                country=state.get("country") or "中国",
+            )
         return get_today_weather(location)
     except Exception as exc:
         return {"ok": False, "location": location, "error": str(exc)}
