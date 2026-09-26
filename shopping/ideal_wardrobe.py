@@ -48,9 +48,8 @@ def wardrobe_gap_plan(limit=5) -> List[Dict[str, Any]]:
         row["current_count"] = have
         row["missing_count"] = max(0, target - have)
         row["marketplace_links"] = {
-            "京东搜索": build_marketplace_search_url(item.get("search_query", ""), "jd"),
             "淘宝搜索": build_marketplace_search_url(item.get("search_query", ""), "taobao"),
-            "天猫搜索": build_marketplace_search_url(item.get("search_query", ""), "tmall"),
+            "拼多多搜索": build_marketplace_search_url(item.get("search_query", ""), "pinduoduo"),
         }
         rows.append(row)
 
@@ -62,14 +61,14 @@ def wardrobe_gap_plan(limit=5) -> List[Dict[str, Any]]:
 def live_candidates(gap_item: Dict[str, Any], per_market=2) -> List[Dict[str, Any]]:
     query = gap_item.get("search_query", "")
     results = []
-    for market in ("jd", "tmall", "taobao"):
+    for market in ("taobao", "pinduoduo"):
         try:
             for row in search_products(query, marketplace=market, max_results=per_market):
                 if row.get("url"):
                     results.append(row)
         except Exception:
             continue
-    return results[:6]
+    return results[:4]
 
 
 def build_purchase_advice(include_live_links=False, limit=3):
