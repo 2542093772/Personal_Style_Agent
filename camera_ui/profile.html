@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal Style Agent · 个人档案</title>
+  <style>
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;background:#111;color:#eee}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+    .card{background:#1b1b1b;border:1px solid #2d2d2d;border-radius:14px;padding:16px}
+    .k{color:#aaa;font-size:13px}.v{font-size:24px;font-weight:700;margin-top:6px}
+    .small{font-size:14px;color:#bbb}
+    a{color:#9ecbff}
+    ul{padding-left:18px}
+    .empty{color:#888}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <p><a href="/">← 返回摄像头</a></p>
+  <h1>个人视觉档案</h1>
+  <p class="small">这里展示 Agent 当前对你的稳定视觉认知。数据来自你主动开启的持续视觉采集。</p>
+  <div id="summary" class="grid"></div>
+  <div class="card" style="margin-top:16px">
+    <div class="k">最近观察</div>
+    <pre id="latest" style="white-space:pre-wrap;word-break:break-word"></pre>
+  </div>
+</div>
+<script>
+async function loadProfile(){
+  const res = await fetch('/profile-data');
+  const data = await res.json();
+  const stable = data.stable_profile || {};
+  const items = [
+    ['累计样本', stable.sample_count ?? 0],
+    ['脸型倾向', stable.face_shape || '暂无'],
+    ['发长', stable.hair_length || '暂无'],
+    ['发量', stable.hair_volume || '暂无'],
+    ['肩部视觉', stable.shoulder_width_impression || '暂无'],
+    ['躯干长度', stable.torso_length_impression || '暂无'],
+    ['腿部长度', stable.leg_length_impression || '暂无'],
+    ['整体体型', stable.overall_build_impression || '暂无'],
+  ];
+  document.getElementById('summary').innerHTML = items.map(([k,v]) => `
+    <div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>
+  `).join('');
+  document.getElementById('latest').textContent = JSON.stringify(data.latest || {}, null, 2);
+}
+loadProfile().catch(()=>{
+  document.getElementById('summary').innerHTML='<div class="card empty">暂时无法读取档案。</div>';
+});
+</script>
+</body>
+</html>
