@@ -15,6 +15,8 @@ from vision.local_profile_extractor import extract_local_visual_profile
 from vision.profile_collector import append_profile_observation
 from vision.profile_collector import _load as load_profile_data
 from sync.github_profile_sync import sync_profile_async, get_sync_status
+from personalizer.visual_rule_engine import build_rules_from_visual_profile
+from personalizer.rule_store import save_rules, load_json, STYLE_RULES_PATH
 
 app = Flask(__name__, static_folder=".")
 
@@ -34,7 +36,15 @@ def profile_page():
 def profile_data():
     data = load_profile_data()
     data["github_sync"] = get_sync_status()
+    data["visual_style_rules"] = load_json(STYLE_RULES_PATH)
     return jsonify(data)
+
+@app.post("/rebuild-style-rules")
+def rebuild_style_rules():
+    profile = load_profile_data()
+    rules = build_rules_from_visual_profile(profile)
+    save_rules(rules)
+    return jsonify({"ok": True, "visual_style_rules": rules})
 
 @app.get("/sync-status")
 def sync_status():
@@ -80,6 +90,9 @@ def analyze_profile():
         result = extract_local_visual_profile(payload)
         if result.get("ok"):
             result["merged_profile"] = append_profile_observation(result["profile"])
+            rules = build_rules_from_visual_profile(result["merged_profile"])
+            save_rules(rules)
+            result["visual_style_rules"] = rules
             result["github_sync"] = sync_profile_async(force=False)
         result["received_bytes"] = len(payload)
         result["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
