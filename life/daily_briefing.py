@@ -58,10 +58,14 @@ def render_daily_briefing(plan: Dict[str, Any]) -> str:
             lines.append(f"- {item.get('priority')}: {item.get('item')}")
             if item.get("why"):
                 lines.append(f"  原因：{item.get('why')}")
-            links = item.get("marketplace_links", {}) or {}
-            first_link = next((u for u in links.values() if u), "")
-            if first_link:
-                lines.append(f"  购买搜索：{first_link}")
+            candidates = item.get("live_candidates", []) or []
+            if candidates:
+                first = candidates[0]
+                platform = "淘宝" if first.get("marketplace") == "taobao" else "拼多多"
+                lines.append(f"  具体商品：[{platform}] {first.get('title')}")
+                lines.append(f"  链接：{first.get('url')}")
+            else:
+                lines.append("  具体商品：本轮未找到可靠详情页，不推泛搜索链接。")
         lines.append("- 更多候选可在 Telegram 输入 /shop")
     else:
         lines.append("- 当前暂无核心采购缺口。")
