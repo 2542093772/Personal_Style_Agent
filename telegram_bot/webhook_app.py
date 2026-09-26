@@ -98,17 +98,15 @@ def health():
 
 @app.get("/report/today")
 def report_today():
-    survey_path = os.path.join("reports", "daily_learning_survey.json")
-    survey = {}
-    try:
-        if os.path.exists(survey_path):
-            with open(survey_path, "r", encoding="utf-8") as fh:
-                survey = json.load(fh)
-    except Exception:
-        survey = {}
-
-    plan = build_daily_plan({})
-    return Response(render_daily_html(plan, survey), mimetype="text/html")
+    report_path = os.path.join("reports", "daily_style_report.html")
+    if not os.path.exists(report_path):
+        return Response(
+            "<h2>今日日报尚未生成</h2><p>系统会在每天 07:45 自动生成并推送。</p>",
+            status=404,
+            mimetype="text/html",
+        )
+    with open(report_path, "r", encoding="utf-8") as fh:
+        return Response(fh.read(), mimetype="text/html")
 
 
 @app.post("/telegram/webhook")

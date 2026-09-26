@@ -6,6 +6,8 @@ from typing import Any, Dict, List
 import yaml
 from life.outfit_recommender import build_outfit_recommendations
 from shopping.ideal_wardrobe import build_purchase_advice
+from personalizer.baseline_rules import build_baseline_rules
+from life.context_rules import weather_actions, weather_summary
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -57,6 +59,7 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
     config = _yaml("config/daily_assistant.yaml", {})
     profile = _json("personal/visual_profile.json", {})
     visual_rules = _json("personal/visual_style_rules.json", {})
+    profile_cfg = _yaml("config/profile.yaml", {})
     learned_rules = _json("personal/learned_rules.json", [])
     wardrobe = _json("data/wardrobe.json", [])
     feedback = _json("data/feedback.json", [])
@@ -65,6 +68,8 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
 
     stable = profile.get("stable_profile", {})
     top_rules = _top_visual_rules(visual_rules)
+    if not top_rules:
+        top_rules = build_baseline_rules(profile_cfg)[:5]
 
     outfit_recommendations = build_outfit_recommendations(
         wardrobe if isinstance(wardrobe, list) else [],
@@ -84,6 +89,7 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
         },
         "today_context": {
             "weather": context.get("weather"),
+            "weather_summary": weather_summary(context.get("weather")),
             "schedule": context.get("schedule"),
             "occasion": context.get("occasion", "daily"),
             "notes": context.get("notes", []),
@@ -111,7 +117,7 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
             "status": "use_existing_profile",
             "notes": [],
         },
-        "useful_reminders": [],
+        "useful_reminders": weather_actions(context.get("weather")),
         "optional_purchase_gap": {
             "should_buy": bool(purchase_advice),
             "reason": "Current wardrobe is sparse; recommendations are generated only for identified capsule-wardrobe gaps." if purchase_advice else "No core wardrobe gap identified.",

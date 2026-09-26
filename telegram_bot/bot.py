@@ -75,21 +75,21 @@ def _weather_from_config():
 
 
 def command_today():
-    weather = _weather_from_config()
-    plan = build_daily_plan({"weather": weather})
+    plan = _json("reports/daily_life_plan.json", {})
+    if not plan:
+        return "今日日报还没生成。系统会在每天 07:45 自动推送；凌晨 02:30 会先完成学习。"
     return render_daily_briefing(plan)
 
 
 def command_report():
-    survey = _json("reports/daily_learning_survey.json", {})
-    weather = _weather_from_config()
-    plan = build_daily_plan({"weather": weather})
-    report_path = build_today_report_file(plan, survey)
+    report_path = ROOT / "reports" / "daily_style_report.html"
+    if not report_path.exists():
+        return "今日日报还没生成。系统会在每天 07:45 自动生成并推送。"
     send_document(
-        report_path,
+        str(report_path),
         caption="今日穿搭与学习报告｜完整方案 + 学习调查 + 采购链接",
     )
-    return "完整日报已作为附件发送。"
+    return "已发送今天预先生成的完整日报。"
 
 
 def command_wardrobe():

@@ -11,12 +11,13 @@ def render_daily_briefing(plan: Dict[str, Any]) -> str:
     lines = ["# 今日生活方案", ""]
 
     weather = ctx.get("weather")
+    weather_text = ctx.get("weather_summary")
     schedule = ctx.get("schedule")
-    if weather:
-        lines.append(f"天气：{weather}")
+    if weather_text:
+        lines.append(f"天气：{weather_text}")
     if schedule:
         lines.append(f"日程：{schedule}")
-    if weather or schedule:
+    if weather_text or schedule:
         lines.append("")
 
     lines += ["## 互联网学习后的建议穿搭"]

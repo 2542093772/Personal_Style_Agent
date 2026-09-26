@@ -109,7 +109,7 @@ def render_daily_html(plan: Dict[str, Any], survey: Dict[str, Any] | None = None
     rule_html = "".join(f"<li>{_esc(r.get('title'))}</li>" for r in rules[:6]) or "<li>暂无稳定个人规则</li>"
     cards.append(f"<section><h2>个人规则</h2><ul>{rule_html}</ul></section>")
 
-    weather = _esc(ctx.get("weather") or "未配置")
+    weather = _esc(ctx.get("weather_summary") or "天气暂不可用")
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
