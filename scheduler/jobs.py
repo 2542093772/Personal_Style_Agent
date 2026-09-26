@@ -9,6 +9,8 @@ from research.web_research import collect_daily_signals
 from life.daily_planner import build_daily_plan
 from life.daily_briefing import render_daily_briefing
 from notifications.webhook_notifier import push_daily_briefing
+from life.weather_open_meteo import get_today_weather
+import yaml
 
 REPORTS = Path("reports")
 KNOWLEDGE = Path("knowledge")
@@ -35,7 +37,11 @@ def _write_json(path, data):
 
 
 def daily_life_briefing():
-    plan = build_daily_plan()
+    cfg_path = Path("config/daily_assistant.yaml")
+    cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) if cfg_path.exists() else {}
+    location = ((cfg or {}).get("weather") or {}).get("location", "")
+    weather = get_today_weather(location) if location else None
+    plan = build_daily_plan({"weather": weather})
     briefing = render_daily_briefing(plan)
     _write_json(REPORTS / "daily_life_plan.json", plan)
     (REPORTS / "daily_life_briefing.md").write_text(briefing, encoding="utf-8")
