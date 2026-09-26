@@ -1,1 +1,284 @@
-[]
+[
+  {
+    "id": "tim_dessaint",
+    "name": "Tim Dessaint",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "instagram"
+    ],
+    "role": "core_method",
+    "focus": [
+      "capsule_wardrobe",
+      "minimal_menswear",
+      "proportion",
+      "outfit_formulas"
+    ],
+    "fit_for_agent": [
+      "clean",
+      "youthful",
+      "sharp",
+      "small_wardrobe"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Tim Dessaint\" menswear outfit proportions",
+      "\"Tim Dessaint\" capsule wardrobe men"
+    ]
+  },
+  {
+    "id": "daniel_simmons",
+    "name": "Daniel Simmons",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "instagram"
+    ],
+    "role": "core_method",
+    "focus": [
+      "neutral_palette",
+      "modern_minimal",
+      "seasonal_layering",
+      "tailored_casual"
+    ],
+    "fit_for_agent": [
+      "clean",
+      "sharp",
+      "wardrobe_system"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Daniel Simmons\" menswear outfit",
+      "\"Daniel Simmons\" capsule wardrobe"
+    ]
+  },
+  {
+    "id": "harry_has",
+    "name": "Harry Has",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "instagram"
+    ],
+    "role": "core_method",
+    "focus": [
+      "straight_fit",
+      "casual_menswear",
+      "fit",
+      "accessible_outfits"
+    ],
+    "fit_for_agent": [
+      "youthful",
+      "clean",
+      "practical"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Harry Has\" menswear",
+      "\"Harry Has\" outfit style men"
+    ]
+  },
+  {
+    "id": "parker_york_smith",
+    "name": "Parker York Smith",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "tiktok"
+    ],
+    "role": "core_method",
+    "focus": [
+      "styling_basics",
+      "proportion",
+      "accessible_style",
+      "confidence"
+    ],
+    "fit_for_agent": [
+      "practical",
+      "repeatable_formulas",
+      "clean"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Parker York Smith\" menswear",
+      "\"Parker York Smith\" outfit tips"
+    ]
+  },
+  {
+    "id": "brock_mcgoff",
+    "name": "Brock McGoff / The Modest Man",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "web"
+    ],
+    "role": "core_method",
+    "focus": [
+      "fit",
+      "shorter_men",
+      "capsule_wardrobe",
+      "wardrobe_basics"
+    ],
+    "fit_for_agent": [
+      "proportion",
+      "small_wardrobe",
+      "practical"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Brock McGoff\" menswear fit",
+      "\"The Modest Man\" capsule wardrobe men"
+    ]
+  },
+  {
+    "id": "real_men_real_style",
+    "name": "Antonio Centeno / Real Men Real Style",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "web"
+    ],
+    "role": "core_method",
+    "focus": [
+      "fit",
+      "fabric",
+      "dress_codes",
+      "wardrobe_strategy"
+    ],
+    "fit_for_agent": [
+      "fundamentals",
+      "shopping_logic",
+      "fit"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Real Men Real Style\" fit men",
+      "\"Antonio Centeno\" wardrobe menswear"
+    ]
+  },
+  {
+    "id": "wisdom_kaye",
+    "name": "Wisdom Kaye",
+    "region": "international",
+    "platforms": [
+      "instagram",
+      "tiktok"
+    ],
+    "role": "trend_visual",
+    "focus": [
+      "editorial_menswear",
+      "silhouette",
+      "color",
+      "high_fashion"
+    ],
+    "fit_for_agent": [
+      "trend_reference",
+      "visual_inspiration"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Wisdom Kaye\" menswear outfit",
+      "\"Wisdom Kaye\" fashion styling"
+    ]
+  },
+  {
+    "id": "jordan_obrien",
+    "name": "Jordan O'Brien",
+    "region": "international",
+    "platforms": [
+      "youtube",
+      "instagram"
+    ],
+    "role": "trend_visual",
+    "focus": [
+      "casual_menswear",
+      "street_style",
+      "outfit_inspiration"
+    ],
+    "fit_for_agent": [
+      "youthful",
+      "casual"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"Jordan O'Brien\" mens fashion",
+      "\"Jordan O'Brien\" outfit"
+    ]
+  },
+  {
+    "id": "chammy",
+    "name": "痴五安chammy",
+    "region": "china",
+    "platforms": [
+      "bilibili"
+    ],
+    "role": "core_method",
+    "focus": [
+      "small_frame",
+      "capsule_wardrobe",
+      "basics",
+      "layering",
+      "proportion"
+    ],
+    "fit_for_agent": [
+      "youthful",
+      "small_wardrobe",
+      "practical",
+      "proportion"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"痴五安chammy\" 男生穿搭",
+      "\"痴五安chammy\" 胶囊衣橱",
+      "\"痴五安chammy\" 小个子 穿搭"
+    ]
+  },
+  {
+    "id": "chen_gengxin",
+    "name": "陈更新不常更新",
+    "region": "china",
+    "platforms": [
+      "bilibili"
+    ],
+    "role": "practical_case",
+    "focus": [
+      "172cm_outfits",
+      "basics",
+      "weekly_outfits",
+      "commute"
+    ],
+    "fit_for_agent": [
+      "practical",
+      "body_proportion_case"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"陈更新不常更新\" 男生穿搭",
+      "\"陈更新\" 172 男生穿搭"
+    ]
+  },
+  {
+    "id": "alu",
+    "name": "阿鲁阿鲁aLu",
+    "region": "china",
+    "platforms": [
+      "bilibili"
+    ],
+    "role": "practical_case",
+    "focus": [
+      "menswear_commentary",
+      "outfit_review",
+      "proportion"
+    ],
+    "fit_for_agent": [
+      "mistake_analysis",
+      "practical"
+    ],
+    "enabled": true,
+    "search_queries": [
+      "\"阿鲁阿鲁aLu\" 男生穿搭",
+      "\"阿鲁阿鲁aLu\" 穿搭"
+    ]
+  }
+]
