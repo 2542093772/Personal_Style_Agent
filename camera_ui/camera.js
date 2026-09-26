@@ -9,6 +9,7 @@ const resultEl = document.getElementById("result");
 const collectStateEl = document.getElementById("collectState");
 const sampleCountEl = document.getElementById("sampleCount");
 const lastSampleEl = document.getElementById("lastSample");
+const cloudSyncEl = document.getElementById("cloudSync");
 
 let stream = null;
 let analysisEnabled = false;
@@ -92,6 +93,8 @@ async function collectProfileSample() {
       collectStateEl.textContent = "采集中";
       sampleCountEl.textContent = stable.sample_count ?? 0;
       lastSampleEl.textContent = new Date().toLocaleTimeString();
+      const sync = data.github_sync || {};
+      cloudSyncEl.textContent = sync.message || "等待同步";
     } else {
       statusEl.textContent = "持续视觉采集失败，请检查模型配置。";
     }

@@ -14,6 +14,7 @@ from vision.style_vision import analyze_frame as run_style_vision
 from vision.local_profile_extractor import extract_local_visual_profile
 from vision.profile_collector import append_profile_observation
 from vision.profile_collector import _load as load_profile_data
+from sync.github_profile_sync import sync_profile_async, get_sync_status
 
 app = Flask(__name__, static_folder=".")
 
@@ -31,7 +32,17 @@ def profile_page():
 
 @app.get("/profile-data")
 def profile_data():
-    return jsonify(load_profile_data())
+    data = load_profile_data()
+    data["github_sync"] = get_sync_status()
+    return jsonify(data)
+
+@app.get("/sync-status")
+def sync_status():
+    return jsonify(get_sync_status())
+
+@app.post("/sync-profile-now")
+def sync_profile_now():
+    return jsonify(sync_profile_async(force=True))
 
 @app.post("/analyze-frame")
 def analyze_frame():
@@ -69,6 +80,7 @@ def analyze_profile():
         result = extract_local_visual_profile(payload)
         if result.get("ok"):
             result["merged_profile"] = append_profile_observation(result["profile"])
+            result["github_sync"] = sync_profile_async(force=False)
         result["received_bytes"] = len(payload)
         result["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
         return jsonify(result)
