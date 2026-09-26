@@ -14,6 +14,8 @@ from life.location_state import get_default_location, get_location_state
 from research.learning_report import build_learning_survey, render_learning_survey_md, render_learning_push_summary
 from reports.daily_report import build_today_report_file
 from notifications.telegram_document import send_document
+from research.creator_philosophy import build_creator_philosophies
+from research.creator_discovery import discover_creator_candidates, promote_qualified_candidates
 import yaml
 
 REPORTS = Path("reports")
@@ -89,6 +91,7 @@ def daily_light_learning():
     signals = collect_daily_signals()
     candidates = build_candidates()
     survey = build_learning_survey(signals, candidates)
+    philosophies = build_creator_philosophies()
     survey_md = render_learning_survey_md(survey)
     _write_json(REPORTS / "daily_learning_survey.json", survey)
     (REPORTS / "daily_learning_survey.md").write_text(survey_md, encoding="utf-8")
@@ -101,6 +104,9 @@ def daily_light_learning():
         "query_batch_count": len(signals),
         "result_count": sum(len(x.get("results", [])) for x in signals),
         "candidate_rule_count": len(candidates),
+        "creator_count": philosophies.get("creator_count", 0),
+        "profiled_creator_count": philosophies.get("profiled_creator_count", 0),
+        "cross_creator_consensus_count": len(philosophies.get("cross_creator_consensus", [])),
         "survey_report": "reports/daily_learning_survey.md",
     }
 
@@ -109,7 +115,10 @@ def daily_light_learning():
 
 
 def weekly_review():
+    discovered = discover_creator_candidates()
+    promoted = promote_qualified_candidates(max_new=3)
     candidates = build_candidates()
+    philosophies = build_creator_philosophies()
     current = _load_json(KNOWLEDGE / "current_trends.json", [])
     creators = _load_json("research/creators.json", [])
     celebrities = _load_json("research/celebrity_profiles.json", [])
@@ -120,6 +129,10 @@ def weekly_review():
         "trend_batch_count": len(current),
         "candidate_rule_count": len(candidates),
         "creator_profile_count": len(creators),
+        "creator_candidate_count": len(discovered),
+        "new_creator_count": len(promoted),
+        "profiled_creator_count": philosophies.get("profiled_creator_count", 0),
+        "cross_creator_consensus_count": len(philosophies.get("cross_creator_consensus", [])),
         "celebrity_profile_count": len(celebrities),
         "policy": "review_and_score_only_no_personal_rule_promotion",
         "candidate_rules": candidates,
