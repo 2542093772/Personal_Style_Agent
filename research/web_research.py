@@ -6,6 +6,7 @@ from ddgs import DDGS
 
 SOURCES = Path("research/sources.yaml")
 TRENDS = Path("knowledge/current_trends.json")
+CREATORS = Path("research/creators.json")
 
 
 def load_config():
@@ -22,6 +23,46 @@ def search_once(query, max_results=8):
                 "snippet": item.get("body", ""),
             })
     return rows
+
+
+def load_creators():
+    if not CREATORS.exists():
+        return []
+    try:
+        data = json.loads(CREATORS.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def collect_creator_signals(max_creators=None):
+    creators = [x for x in load_creators() if x.get("enabled", True)]
+    if max_creators:
+        creators = creators[:max_creators]
+
+    collected = []
+
+    # Fixed creator-learning track: this gives the agent stable reference objects
+    # instead of relying only on generic trend searches.
+    collected.extend(collect_creator_signals())
+    for creator in creators:
+        for query in creator.get("search_queries", [])[:3]:
+            try:
+                results = search_once(query, max_results=4)
+            except Exception as exc:
+                results = [{"error": str(exc)}]
+
+            collected.append({
+                "source_type": "creator",
+                "creator_id": creator.get("id"),
+                "creator_name": creator.get("name"),
+                "creator_role": creator.get("role"),
+                "creator_focus": creator.get("focus", []),
+                "query": query,
+                "collected_at_utc": datetime.now(timezone.utc).isoformat(),
+                "results": results,
+            })
+    return collected
 
 
 def collect_daily_signals():
