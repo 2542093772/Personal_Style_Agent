@@ -10,6 +10,7 @@ from telegram_bot.bot import (
     BASE,
     command_help,
     command_report,
+    command_shop,
     command_today,
     command_wardrobe,
     send_message,
@@ -32,6 +33,8 @@ def _reply_for(text: str) -> str:
         return command_report()
     if command == "/wardrobe":
         return command_wardrobe()
+    if command == "/shop":
+        return command_shop()
     return "我目前先支持固定命令。\n\n" + command_help()
 
 
