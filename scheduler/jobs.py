@@ -6,6 +6,11 @@ from pathlib import Path
 from curator.trend_curator import build_candidates
 from personalizer.monthly_personalizer import update_personal_rules
 from research.web_research import collect_daily_signals
+from life.daily_planner import build_daily_plan
+from life.daily_briefing import render_daily_briefing
+from notifications.webhook_notifier import push_daily_briefing
+from life.weather_open_meteo import get_today_weather
+import yaml
 
 REPORTS = Path("reports")
 KNOWLEDGE = Path("knowledge")
@@ -29,6 +34,21 @@ def _write_json(path, data):
         json.dumps(data, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+
+
+def daily_life_briefing():
+    cfg_path = Path("config/daily_assistant.yaml")
+    cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) if cfg_path.exists() else {}
+    location = ((cfg or {}).get("weather") or {}).get("location", "")
+    weather = get_today_weather(location) if location else None
+    plan = build_daily_plan({"weather": weather})
+    briefing = render_daily_briefing(plan)
+    _write_json(REPORTS / "daily_life_plan.json", plan)
+    (REPORTS / "daily_life_briefing.md").write_text(briefing, encoding="utf-8")
+    delivery = push_daily_briefing(briefing, plan)
+    _write_json(REPORTS / "daily_delivery_status.json", delivery)
+    print(briefing)
+    print(json.dumps(delivery, ensure_ascii=False, indent=2))
 
 
 def daily_light_learning():
@@ -94,12 +114,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "job",
-        choices=["daily", "weekly", "monthly"],
+        choices=["daily", "daily-briefing", "weekly", "monthly"],
     )
     args = parser.parse_args()
 
     if args.job == "daily":
         daily_light_learning()
+    elif args.job == "daily-briefing":
+        daily_life_briefing()
     elif args.job == "weekly":
         weekly_review()
     else:

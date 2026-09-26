@@ -10,12 +10,15 @@ on:
         type: choice
         options:
           - daily
+          - daily-briefing
           - weekly
           - monthly
 
   schedule:
     # Asia/Shanghai 07:30 = UTC 23:30 previous day
     - cron: "30 23 * * *"
+    # Asia/Shanghai 07:45 = UTC 23:45 previous day
+    - cron: "45 23 * * *"
     # Sunday 20:30 Asia/Shanghai = Sunday 12:30 UTC
     - cron: "30 12 * * 0"
     # 1st day 21:00 Asia/Shanghai = 13:00 UTC
@@ -41,6 +44,26 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add reports knowledge research personal
           git diff --cached --quiet || git commit -m "chore: daily style learning"
+          git push
+
+  daily-briefing:
+    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily-briefing' || github.event_name == 'schedule' && github.event.schedule == '45 23 * * *'
+    runs-on: ubuntu-latest
+    env:
+      LIFE_ASSISTANT_WEBHOOK_URL: ${{ secrets.LIFE_ASSISTANT_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python scheduler/jobs.py daily-briefing
+      - name: Commit daily life plan
+        run: |
+          git config user.name "personal-style-agent"
+          git config user.email "actions@users.noreply.github.com"
+          git add reports
+          git diff --cached --quiet || git commit -m "chore: daily life briefing"
           git push
 
   weekly:
