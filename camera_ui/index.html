@@ -3,34 +3,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Personal Style Agent Camera</title>
+  <title>Personal Style Agent</title>
   <style>
     body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;background:#111;color:#eee}
     .wrap{max-width:960px;margin:0 auto;padding:24px}
+    .choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
+    .choiceCard{background:#1b1b1b;border:1px solid #333;border-radius:16px;padding:18px}
+    .choiceCard h3{margin:0 0 8px}.choiceCard p{color:#bbb;line-height:1.5}
     video{width:100%;max-height:70vh;background:#000;border-radius:16px}
     .row{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
     button{padding:12px 18px;border:0;border-radius:10px;cursor:pointer}
-    .on{background:#2e7d32;color:#fff}.off{background:#b71c1c;color:#fff}.secondary{background:#333;color:#fff}.profile{background:#1565c0;color:#fff}
+    .primary{background:#1565c0;color:#fff}.on{background:#2e7d32;color:#fff}.off{background:#b71c1c;color:#fff}.secondary{background:#333;color:#fff}
     .status{padding:10px 12px;border-radius:10px;background:#222;margin-top:12px}
     .active{outline:3px solid #2e7d32}
     pre{white-space:pre-wrap;word-break:break-word;background:#181818;padding:16px;border-radius:12px}
+    .hidden{display:none}
+    a{color:#9ecbff}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Personal Style Agent · 摄像头会话</h1>
-  <p>先建立视觉档案，再做穿搭分析。摄像头默认关闭，只有你主动授权后才会使用。</p>
-  <video id="video" autoplay playsinline muted></video>
-  <canvas id="canvas" hidden></canvas>
-  <div class="row">
-    <button id="startBtn" class="on">开启摄像头</button>
-    <button id="stopBtn" class="off" disabled>停止摄像头</button>
-    <button id="profileBtn" class="profile" disabled>建立视觉档案</button>
-    <button id="analysisBtn" class="secondary" disabled>开启实时穿搭分析</button>
+  <h1>Personal Style Agent</h1>
+  <p>先选择是否沿用上一次个人档案。摄像头只在你主动选择“更新个人信息”后使用。</p>
+
+  <div id="profileChoice" class="choice">
+    <div class="choiceCard">
+      <h3>沿用上一次个人信息</h3>
+      <p>直接读取现有视觉档案和个性化规则，不重新采集。</p>
+      <button id="reuseProfileBtn" class="primary">沿用上一次档案</button>
+    </div>
+    <div class="choiceCard">
+      <h3>更新个人信息</h3>
+      <p>仅在你主动更新时开启摄像头。适合发型、体型或外观发生明显变化后重新采集。</p>
+      <button id="updateProfileBtn" class="secondary">打开摄像头更新</button>
+    </div>
   </div>
-  <div id="status" class="status">摄像头未开启</div>
-  <div class="status"><strong>采集状态：</strong><span id="collectState">未采集</span> ｜ <strong>累计样本：</strong><span id="sampleCount">0</span> ｜ <strong>最近采集：</strong><span id="lastSample">暂无</span> ｜ <strong>云端：</strong><span id="cloudSync">等待同步</span> ｜ <a href="/profile" style="color:#9ecbff">查看个人档案</a></div>
-  <pre id="result"></pre>
+
+  <div id="reusePanel" class="hidden">
+    <div class="status"><strong>当前档案：</strong><span id="reuseSummary">读取中...</span> ｜ <a href="/profile">查看完整档案</a></div>
+  </div>
+
+  <div id="cameraPanel" class="hidden">
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="canvas" hidden></canvas>
+    <div class="row">
+      <button id="startBtn" class="on">开启摄像头</button>
+      <button id="stopBtn" class="off" disabled>停止摄像头</button>
+      <button id="profileBtn" class="primary" disabled>采集并更新个人档案</button>
+      <button id="analysisBtn" class="secondary" disabled>开启实时穿搭分析</button>
+    </div>
+    <div id="status" class="status">等待开启摄像头</div>
+    <div class="status"><strong>本次更新：</strong><span id="collectState">尚未采集</span> ｜ <strong>档案样本数：</strong><span id="sampleCount">0</span> ｜ <strong>最近采集：</strong><span id="lastSample">暂无</span> ｜ <strong>云端：</strong><span id="cloudSync">等待同步</span> ｜ <a href="/profile">查看个人档案</a></div>
+    <pre id="result"></pre>
+  </div>
 </div>
 <script src="./camera.js"></script>
 </body>
