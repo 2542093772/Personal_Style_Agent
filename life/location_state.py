@@ -11,24 +11,14 @@ from typing import Any, Dict, Optional
 
 import yaml
 
+from life.china_location_resolver import resolve_china_location
+
 ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "personal" / "location_state.json"
 CONFIG_PATH = ROOT / "config" / "daily_assistant.yaml"
 
 DEFAULT_LOCATION = "Suzhou"
 DEFAULT_DISPLAY_NAME = "苏州"
-
-CITY_ALIASES = {
-    "苏州": {"query": "Suzhou", "admin1": "Jiangsu"},
-    "上海": {"query": "Shanghai", "admin1": "Shanghai"},
-    "泰州": {"query": "Taizhou", "admin1": "Jiangsu"},
-    "杭州": {"query": "Hangzhou", "admin1": "Zhejiang"},
-    "南京": {"query": "Nanjing", "admin1": "Jiangsu"},
-    "北京": {"query": "Beijing", "admin1": "Beijing"},
-    "深圳": {"query": "Shenzhen", "admin1": "Guangdong"},
-    "广州": {"query": "Guangzhou", "admin1": "Guangdong"},
-    "宁波": {"query": "Ningbo", "admin1": "Zhejiang"},
-}
 
 TRAVEL_PATTERNS = [
     r"(?:我)?(?:现在|目前|这几天|接下来|之后)?(?:在|到了|到|住在|待在)\s*([A-Za-z\u4e00-\u9fff·]{2,16}?)(?:了|出差|旅游|工作|待|住|，|。|！|!|$)",
@@ -80,50 +70,7 @@ def get_default_location() -> str:
 
 
 def geocode_location(name: str) -> Optional[Dict[str, Any]]:
-    name = (name or "").strip()
-    if not name:
-        return None
-
-    alias = CITY_ALIASES.get(name)
-    query_name = alias.get("query") if alias else name
-    preferred_admin1 = (alias or {}).get("admin1")
-
-    q = urllib.parse.urlencode({
-        "name": query_name,
-        "count": 10,
-        "language": "zh",
-        "format": "json",
-    })
-    url = f"https://geocoding-api.open-meteo.com/v1/search?{q}"
-    try:
-        with urllib.request.urlopen(url, timeout=12) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-    except Exception:
-        return None
-
-    rows = data.get("results") or []
-    if not rows:
-        return None
-
-    row = rows[0]
-    if preferred_admin1:
-        preferred = preferred_admin1.lower()
-        for candidate in rows:
-            admin1 = str(candidate.get("admin1") or "").lower()
-            if preferred in admin1 or admin1 in preferred:
-                row = candidate
-                break
-
-    return {
-        "query": name,
-        "default_location": row.get("name") or query_name,
-        "display_name": name if alias else (row.get("name") or name),
-        "admin1": row.get("admin1"),
-        "country": row.get("country"),
-        "latitude": row.get("latitude"),
-        "longitude": row.get("longitude"),
-    }
-
+    return resolve_china_location(name)
 
 def detect_location_update(text: str) -> Optional[Dict[str, Any]]:
     text = (text or "").strip()
