@@ -11,7 +11,6 @@ from life.daily_briefing import render_daily_briefing
 from notifications.channel_router import push_message
 from life.weather_open_meteo import get_today_weather
 from research.learning_report import build_learning_survey, render_learning_survey_md
-from curator.trend_curator import build_candidates
 import yaml
 
 REPORTS = Path("reports")
