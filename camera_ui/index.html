@@ -10,21 +10,23 @@
     video{width:100%;max-height:70vh;background:#000;border-radius:16px}
     .row{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
     button{padding:12px 18px;border:0;border-radius:10px;cursor:pointer}
-    .on{background:#2e7d32;color:#fff}.off{background:#b71c1c;color:#fff}.secondary{background:#333;color:#fff}
+    .on{background:#2e7d32;color:#fff}.off{background:#b71c1c;color:#fff}.secondary{background:#333;color:#fff}.profile{background:#1565c0;color:#fff}
     .status{padding:10px 12px;border-radius:10px;background:#222;margin-top:12px}
     .active{outline:3px solid #2e7d32}
+    pre{white-space:pre-wrap;word-break:break-word;background:#181818;padding:16px;border-radius:12px}
   </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Personal Style Agent · 摄像头会话</h1>
-  <p>摄像头默认关闭。只有你点击“开启摄像头”并授权后才会使用。</p>
+  <p>先建立视觉档案，再做穿搭分析。摄像头默认关闭，只有你主动授权后才会使用。</p>
   <video id="video" autoplay playsinline muted></video>
   <canvas id="canvas" hidden></canvas>
   <div class="row">
     <button id="startBtn" class="on">开启摄像头</button>
     <button id="stopBtn" class="off" disabled>停止摄像头</button>
-    <button id="analysisBtn" class="secondary" disabled>开启实时分析</button>
+    <button id="profileBtn" class="profile" disabled>建立视觉档案</button>
+    <button id="analysisBtn" class="secondary" disabled>开启实时穿搭分析</button>
   </div>
   <div id="status" class="status">摄像头未开启</div>
   <pre id="result"></pre>
