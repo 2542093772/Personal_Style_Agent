@@ -40,12 +40,22 @@ def build_learning_survey(signals: List[Dict[str, Any]], candidate_rules: List[D
 
 
 def render_learning_survey_md(report: Dict[str, Any]) -> str:
+    session = report.get("learning_session", {}) or {}
     lines = [
         "# 每日学习调查报告",
         "",
         f"- 检索主题：{report.get('query_count', 0)}",
         f"- 有效来源：{report.get('source_count', 0)}",
         f"- 检索异常：{report.get('error_count', 0)}",
+    ]
+    if session:
+        elapsed_min = round(float(session.get("actual_elapsed_seconds", 0)) / 60, 1)
+        lines += [
+            f"- 持续学习：{elapsed_min} 分钟",
+            f"- 学习轮次：{session.get('rounds', 0)}",
+            f"- 去重后来源：{session.get('unique_result_count', 0)}",
+        ]
+    lines += [
         "",
         "## 今日来源",
     ]
@@ -86,9 +96,14 @@ def render_learning_survey_md(report: Dict[str, Any]) -> str:
 
 
 def render_learning_push_summary(report: Dict[str, Any]) -> str:
+    session = report.get("learning_session", {}) or {}
+    session_text = ""
+    if session:
+        elapsed_min = round(float(session.get("actual_elapsed_seconds", 0)) / 60, 1)
+        session_text = f" ｜ 学习 {elapsed_min} 分钟 / {session.get('rounds', 0)} 轮"
     lines = [
         "# 今日学习调查摘要",
-        f"检索主题：{report.get('query_count', 0)} ｜ 有效来源：{report.get('source_count', 0)} ｜ 候选规则：{len(report.get('candidate_rules', []) or [])}",
+        f"检索主题：{report.get('query_count', 0)} ｜ 有效来源：{report.get('source_count', 0)} ｜ 候选规则：{len(report.get('candidate_rules', []) or [])}{session_text}",
         "",
     ]
     sources = report.get("sources", []) or []

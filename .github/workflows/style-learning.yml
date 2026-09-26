@@ -29,6 +29,10 @@ permissions:
 
 jobs:
   daily:
+    timeout-minutes: 50
+    env:
+      DAILY_LEARNING_MINUTES: "30"
+      DAILY_LEARNING_ROUND_INTERVAL_SECONDS: "240"
     if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily' || github.event_name == 'schedule' && github.event.schedule == '30 17 * * *'
     runs-on: ubuntu-latest
     steps:
