@@ -15,8 +15,8 @@ on:
           - monthly
 
   schedule:
-    # Asia/Shanghai 02:30 = UTC 18:30 previous day: overnight internet learning
-    - cron: "30 18 * * *"
+    # Asia/Shanghai 01:30 = UTC 17:30 previous day: overnight internet learning
+    - cron: "30 17 * * *"
     # Asia/Shanghai 07:45 = UTC 23:45 previous day: build and push morning report
     - cron: "45 23 * * *"
     # Sunday 20:30 Asia/Shanghai = Sunday 12:30 UTC
@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   daily:
-    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily' || github.event_name == 'schedule' && github.event.schedule == '30 18 * * *'
+    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily' || github.event_name == 'schedule' && github.event.schedule == '30 17 * * *'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
