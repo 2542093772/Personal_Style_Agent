@@ -1,0 +1,16 @@
+weights:
+  weather_fit: 0.25
+  occasion_fit: 0.25
+  silhouette: 0.20
+  color_harmony: 0.15
+  personal_feedback: 0.15
+
+rules:
+  prefer:
+    - clean_lines
+    - balanced_proportions
+    - age_reducing
+  avoid:
+    - bulky_upper_body
+    - muddy_colors_near_face
+    - overly_formal_without_context
