@@ -9,7 +9,9 @@ const resultEl = document.getElementById("result");
 
 let stream = null;
 let analysisEnabled = false;
+let profileCollectionEnabled = false;
 let timer = null;
+let profileTimer = null;
 
 async function startCamera() {
   stream = await navigator.mediaDevices.getUserMedia({
@@ -22,14 +24,19 @@ async function startCamera() {
   stopBtn.disabled = false;
   profileBtn.disabled = false;
   analysisBtn.disabled = false;
-  statusEl.textContent = "摄像头已开启。建议先点击“建立视觉档案”。";
+  statusEl.textContent = "摄像头已开启。可开启持续视觉采集来完善个人档案。";
 }
 
 function stopCamera() {
   analysisEnabled = false;
+  profileCollectionEnabled = false;
   if (timer) {
     clearInterval(timer);
     timer = null;
+  }
+  if (profileTimer) {
+    clearInterval(profileTimer);
+    profileTimer = null;
   }
   if (stream) {
     stream.getTracks().forEach(t => t.stop());
@@ -41,6 +48,7 @@ function stopCamera() {
   stopBtn.disabled = true;
   profileBtn.disabled = true;
   analysisBtn.disabled = true;
+  profileBtn.textContent = "开启持续视觉采集";
   analysisBtn.textContent = "开启实时穿搭分析";
   statusEl.textContent = "摄像头已停止";
 }
@@ -58,23 +66,50 @@ async function captureBlob() {
   return await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", 0.85));
 }
 
-async function analyzeProfile() {
+async function collectProfileSample() {
+  if (!profileCollectionEnabled) return;
   const blob = await captureBlob();
   if (!blob) return;
 
-  statusEl.textContent = "正在识别你的视觉特征...";
   const form = new FormData();
   form.append("frame", blob, "profile.jpg");
 
   try {
     const resp = await fetch("/analyze-profile", { method: "POST", body: form });
     const data = await resp.json();
-    resultEl.textContent = JSON.stringify(data, null, 2);
-    statusEl.textContent = data.ok
-      ? "本次视觉档案观察已完成。可换正面/侧面/更完整全身视角继续补充。"
-      : "视觉档案识别失败，请检查配置。";
+    if (data.ok) {
+      const stable = data.merged_profile?.stable_profile || {};
+      resultEl.textContent = JSON.stringify({
+        mode: "continuous_profile_collection",
+        stable_profile: stable,
+        latest_observation: data.profile
+      }, null, 2);
+      statusEl.textContent = "持续视觉采集中：正在累积你的稳定外形与比例特征。";
+    } else {
+      statusEl.textContent = "持续视觉采集失败，请检查模型配置。";
+    }
   } catch (e) {
-    statusEl.textContent = "视觉档案接口未连接或暂不可用。";
+    statusEl.textContent = "持续视觉采集接口暂不可用。";
+  }
+}
+
+function toggleProfileCollection() {
+  profileCollectionEnabled = !profileCollectionEnabled;
+  profileBtn.textContent = profileCollectionEnabled
+    ? "停止持续视觉采集"
+    : "开启持续视觉采集";
+
+  if (profileCollectionEnabled) {
+    statusEl.textContent = "持续视觉采集已开启。默认只保存提取后的特征，不保存原始画面。";
+    collectProfileSample();
+    if (profileTimer) clearInterval(profileTimer);
+    profileTimer = setInterval(collectProfileSample, 12000);
+  } else {
+    if (profileTimer) {
+      clearInterval(profileTimer);
+      profileTimer = null;
+    }
+    statusEl.textContent = "持续视觉采集已停止，但摄像头仍开启。";
   }
 }
 
@@ -115,6 +150,6 @@ startBtn.addEventListener("click", () => startCamera().catch(err => {
   statusEl.textContent = "无法开启摄像头：" + err.message;
 }));
 stopBtn.addEventListener("click", stopCamera);
-profileBtn.addEventListener("click", analyzeProfile);
+profileBtn.addEventListener("click", toggleProfileCollection);
 analysisBtn.addEventListener("click", toggleAnalysis);
 window.addEventListener("beforeunload", stopCamera);
