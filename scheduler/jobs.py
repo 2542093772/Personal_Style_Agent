@@ -1,5 +1,7 @@
 import argparse
 import json
+import os
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -87,22 +89,137 @@ def daily_life_briefing():
     print(json.dumps(delivery, ensure_ascii=False, indent=2))
 
 
+def _signal_identity(batch, row):
+    return (
+        str(batch.get("creator_id") or ""),
+        str(batch.get("query") or ""),
+        str(row.get("url") or ""),
+        str(row.get("title") or ""),
+    )
+
+
+def _merge_signal_batches(accumulated, new_batches):
+    by_batch = {}
+
+    for batch in accumulated:
+        key = (
+            batch.get("source_type", "generic"),
+            batch.get("creator_id"),
+            batch.get("query"),
+        )
+        clone = dict(batch)
+        clone["results"] = list(batch.get("results", []) or [])
+        by_batch[key] = clone
+
+    for batch in new_batches:
+        key = (
+            batch.get("source_type", "generic"),
+            batch.get("creator_id"),
+            batch.get("query"),
+        )
+        target = by_batch.setdefault(key, {**batch, "results": []})
+        seen = {
+            _signal_identity(target, row)
+            for row in target.get("results", [])
+            if isinstance(row, dict) and not row.get("error")
+        }
+        for row in batch.get("results", []) or []:
+            if not isinstance(row, dict):
+                continue
+            if row.get("error"):
+                if not target.get("results"):
+                    target["results"].append(row)
+                continue
+            identity = _signal_identity(batch, row)
+            if identity in seen:
+                continue
+            target["results"].append(row)
+            seen.add(identity)
+
+        target["last_collected_at_utc"] = batch.get("collected_at_utc")
+
+    return list(by_batch.values())
+
+
 def daily_light_learning():
-    signals = collect_daily_signals()
-    candidates = build_candidates()
-    survey = build_learning_survey(signals, candidates)
-    philosophies = build_creator_philosophies()
+    minimum_minutes = max(1, int(os.getenv("DAILY_LEARNING_MINUTES", "30")))
+    round_interval = max(60, int(os.getenv("DAILY_LEARNING_ROUND_INTERVAL_SECONDS", "240")))
+    started = time.monotonic()
+    deadline = started + minimum_minutes * 60
+    accumulated = []
+    rounds = 0
+    candidates = []
+    philosophies = {}
+
+    while True:
+        rounds += 1
+        round_started = datetime.now(timezone.utc).isoformat()
+
+        fresh = collect_daily_signals()
+        accumulated = _merge_signal_batches(accumulated, fresh)
+
+        # Persist the full session before curation so rules/philosophies see
+        # all unique evidence collected tonight, not only the latest round.
+        _write_json(KNOWLEDGE / "current_trends.json", accumulated)
+
+        if rounds == 1 or rounds % 2 == 0:
+            try:
+                discover_creator_candidates()
+            except Exception:
+                pass
+
+        candidates = build_candidates()
+        philosophies = build_creator_philosophies()
+
+        elapsed_seconds = int(time.monotonic() - started)
+        progress = {
+            "run_type": "daily_learning_session",
+            "status": "running",
+            "round": rounds,
+            "minimum_minutes": minimum_minutes,
+            "elapsed_seconds": elapsed_seconds,
+            "unique_query_batches": len(accumulated),
+            "unique_result_count": sum(
+                len([r for r in x.get("results", []) if isinstance(r, dict) and not r.get("error")])
+                for x in accumulated
+            ),
+            "profiled_creator_count": philosophies.get("profiled_creator_count", 0),
+            "round_started_at_utc": round_started,
+        }
+        _write_json(REPORTS / "daily_learning_progress.json", progress)
+        print(json.dumps(progress, ensure_ascii=False, indent=2), flush=True)
+
+        now = time.monotonic()
+        if now >= deadline:
+            break
+
+        time.sleep(min(round_interval, max(1, int(deadline - now))))
+
+    survey = build_learning_survey(accumulated, candidates)
+    survey["learning_session"] = {
+        "minimum_minutes": minimum_minutes,
+        "actual_elapsed_seconds": int(time.monotonic() - started),
+        "rounds": rounds,
+        "unique_query_batches": len(accumulated),
+        "unique_result_count": sum(
+            len([r for r in x.get("results", []) if isinstance(r, dict) and not r.get("error")])
+            for x in accumulated
+        ),
+    }
     survey_md = render_learning_survey_md(survey)
     _write_json(REPORTS / "daily_learning_survey.json", survey)
     (REPORTS / "daily_learning_survey.md").write_text(survey_md, encoding="utf-8")
 
     event = {
-        "run_type": "daily_light_learning",
+        "run_type": "daily_learning_session",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "status": "completed",
         "policy": "collect_only_no_personal_rule_promotion",
-        "query_batch_count": len(signals),
-        "result_count": sum(len(x.get("results", [])) for x in signals),
+        "minimum_learning_minutes": minimum_minutes,
+        "actual_elapsed_seconds": int(time.monotonic() - started),
+        "learning_rounds": rounds,
+        "query_batch_count": len(accumulated),
+        "result_count": survey["learning_session"]["unique_result_count"],
         "candidate_rule_count": len(candidates),
         "creator_count": philosophies.get("creator_count", 0),
         "profiled_creator_count": philosophies.get("profiled_creator_count", 0),
@@ -110,8 +227,9 @@ def daily_light_learning():
         "survey_report": "reports/daily_learning_survey.md",
     }
 
+    _write_json(REPORTS / "daily_learning_progress.json", {**event, "status": "completed"})
     _write_json(REPORTS / "daily_learning_latest.json", event)
-    print(json.dumps(event, ensure_ascii=False, indent=2))
+    print(json.dumps(event, ensure_ascii=False, indent=2), flush=True)
 
 
 def weekly_review():
