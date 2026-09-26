@@ -10,6 +10,7 @@ from life.daily_planner import build_daily_plan
 from life.daily_briefing import render_daily_briefing
 from notifications.channel_router import push_message
 from life.weather_open_meteo import get_today_weather
+from life.location_state import get_default_location
 from research.learning_report import build_learning_survey, render_learning_survey_md, render_learning_push_summary
 from reports.daily_report import build_today_report_file
 from notifications.telegram_document import send_document
@@ -42,7 +43,7 @@ def _write_json(path, data):
 def daily_life_briefing():
     cfg_path = Path("config/daily_assistant.yaml")
     cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) if cfg_path.exists() else {}
-    location = ((cfg or {}).get("weather") or {}).get("location", "")
+    location = get_default_location()
     weather = get_today_weather(location) if location else None
     plan = build_daily_plan({"weather": weather})
     briefing = render_daily_briefing(plan)

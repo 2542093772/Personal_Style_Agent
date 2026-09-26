@@ -47,6 +47,7 @@ def register_commands():
         {"command": "report", "description": "查看今日学习调查摘要"},
         {"command": "wardrobe", "description": "查看当前衣柜状态"},
         {"command": "shop", "description": "查看最值得补的单品与购买链接"},
+        {"command": "location", "description": "查看或更新默认地点"},
         {"command": "help", "description": "查看可用命令"},
     ]
     req = urllib.request.Request(
