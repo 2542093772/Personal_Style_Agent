@@ -10,7 +10,7 @@ from life.daily_planner import build_daily_plan
 from life.daily_briefing import render_daily_briefing
 from notifications.channel_router import push_message
 from life.weather_open_meteo import get_today_weather
-from research.learning_report import build_learning_survey, render_learning_survey_md
+from research.learning_report import build_learning_survey, render_learning_survey_md, render_learning_push_summary
 import yaml
 
 REPORTS = Path("reports")
@@ -48,7 +48,19 @@ def daily_life_briefing():
     (REPORTS / "daily_life_briefing.md").write_text(briefing, encoding="utf-8")
     channel = (((cfg or {}).get("delivery") or {}).get("channel", "auto"))
     delivery = push_message(briefing, channel=channel)
-    _write_json(REPORTS / "daily_delivery_status.json", delivery)
+
+    survey = _load_json(REPORTS / "daily_learning_survey.json", {})
+    learning_delivery = None
+    if survey:
+        learning_delivery = push_message(
+            render_learning_push_summary(survey),
+            channel=channel,
+        )
+
+    _write_json(REPORTS / "daily_delivery_status.json", {
+        "daily_plan": delivery,
+        "learning_report": learning_delivery,
+    })
     print(briefing)
     print(json.dumps(delivery, ensure_ascii=False, indent=2))
 
