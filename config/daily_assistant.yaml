@@ -19,7 +19,7 @@ daily_plan:
     - optional_purchase_gap
 
 weather:
-  location: ""
+  location: "Suzhou"
   source: auto
 
 schedule:
