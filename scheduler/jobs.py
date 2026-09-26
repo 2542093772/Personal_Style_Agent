@@ -8,8 +8,9 @@ from personalizer.monthly_personalizer import update_personal_rules
 from research.web_research import collect_daily_signals
 from life.daily_planner import build_daily_plan
 from life.daily_briefing import render_daily_briefing
-from notifications.webhook_notifier import push_daily_briefing
+from notifications.channel_router import push_message
 from life.weather_open_meteo import get_today_weather
+from research.learning_report import build_learning_survey, render_learning_survey_md, render_learning_push_summary
 import yaml
 
 REPORTS = Path("reports")
@@ -45,14 +46,33 @@ def daily_life_briefing():
     briefing = render_daily_briefing(plan)
     _write_json(REPORTS / "daily_life_plan.json", plan)
     (REPORTS / "daily_life_briefing.md").write_text(briefing, encoding="utf-8")
-    delivery = push_daily_briefing(briefing, plan)
-    _write_json(REPORTS / "daily_delivery_status.json", delivery)
+    channel = (((cfg or {}).get("delivery") or {}).get("channel", "auto"))
+    delivery = push_message(briefing, channel=channel)
+
+    survey = _load_json(REPORTS / "daily_learning_survey.json", {})
+    learning_delivery = None
+    if survey:
+        learning_delivery = push_message(
+            render_learning_push_summary(survey),
+            channel=channel,
+        )
+
+    _write_json(REPORTS / "daily_delivery_status.json", {
+        "daily_plan": delivery,
+        "learning_report": learning_delivery,
+    })
     print(briefing)
     print(json.dumps(delivery, ensure_ascii=False, indent=2))
 
 
 def daily_light_learning():
     signals = collect_daily_signals()
+    candidates = build_candidates()
+    survey = build_learning_survey(signals, candidates)
+    survey_md = render_learning_survey_md(survey)
+    _write_json(REPORTS / "daily_learning_survey.json", survey)
+    (REPORTS / "daily_learning_survey.md").write_text(survey_md, encoding="utf-8")
+
     event = {
         "run_type": "daily_light_learning",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
@@ -60,6 +80,8 @@ def daily_light_learning():
         "policy": "collect_only_no_personal_rule_promotion",
         "query_batch_count": len(signals),
         "result_count": sum(len(x.get("results", [])) for x in signals),
+        "candidate_rule_count": len(candidates),
+        "survey_report": "reports/daily_learning_survey.md",
     }
 
     _write_json(REPORTS / "daily_learning_latest.json", event)

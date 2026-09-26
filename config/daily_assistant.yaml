@@ -26,8 +26,12 @@ schedule:
   source: none
 
 delivery:
-  mode: webhook
-  webhook_env: LIFE_ASSISTANT_WEBHOOK_URL
+  channel: auto
+  supported_channels:
+    - feishu
+    - wecom
+    - telegram
+    - webhook
   fallback_report_only: true
 
 policy:

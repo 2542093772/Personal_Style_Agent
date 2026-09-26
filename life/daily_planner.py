@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 import yaml
+from life.outfit_recommender import build_outfit_recommendations
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -58,10 +59,18 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
     learned_rules = _json("personal/learned_rules.json", [])
     wardrobe = _json("data/wardrobe.json", [])
     feedback = _json("data/feedback.json", [])
-    trends = _json("knowledge/candidate_rules.json", [])
+    candidate_rules = _json("knowledge/candidate_rules.json", [])
+    trends = _json("knowledge/current_trends.json", [])
 
     stable = profile.get("stable_profile", {})
     top_rules = _top_visual_rules(visual_rules)
+
+    outfit_recommendations = build_outfit_recommendations(
+        wardrobe if isinstance(wardrobe, list) else [],
+        trends if isinstance(trends, list) else [],
+        candidate_rules if isinstance(candidate_rules, list) else [],
+        top_rules,
+    )
 
     plan = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -86,11 +95,14 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
             "category_counts": _wardrobe_summary(wardrobe if isinstance(wardrobe, list) else []),
         },
         "recent_feedback": _recent(feedback, 5),
-        "style_learning": _recent(trends, 5),
+        "style_learning": {
+            "candidate_rules": _recent(candidate_rules, 5),
+            "trend_batches": _recent(trends, 3),
+        },
         "outfit_plan": {
-            "status": "needs_wardrobe_items" if not wardrobe else "ready_for_scoring",
             "principles": [r.get("title") for r in top_rules],
-            "items": [],
+            "internet_recommendation": outfit_recommendations.get("internet_recommendation", []),
+            "wardrobe_recommendation": outfit_recommendations.get("wardrobe_recommendation", {}),
         },
         "grooming": {
             "status": "use_existing_profile",
