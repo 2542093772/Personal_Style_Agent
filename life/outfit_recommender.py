@@ -3,6 +3,29 @@ from typing import Any, Dict, List
 
 CORE_CATEGORIES = ["top", "bottom", "shoes", "outerwear"]
 
+FORMULAS = {
+    "proportion": {
+        "title": "比例优先：短上装/明确腰线 + 直线型下装",
+        "formula": ["短或可收腰上装", "中高腰直筒/微宽松下装", "简洁鞋型"],
+        "reason": "近期学习信号集中在比例、腰线、显高显瘦等主题。",
+    },
+    "color": {
+        "title": "配色优先：低复杂度同色/近色组合",
+        "formula": ["中性色上装", "近色系下装", "鞋色与裤色保持连续"],
+        "reason": "近期学习信号集中在配色协调与低冲突色彩组合。",
+    },
+    "layering": {
+        "title": "层次优先：轻量叠穿，不增加上身厚重感",
+        "formula": ["内搭", "轻薄外层", "简洁下装"],
+        "reason": "近期学习信号集中在叠穿与层次关系。",
+    },
+    "smart_casual": {
+        "title": "通勤优先：利落 Smart Casual",
+        "formula": ["干净上装/衬衫", "直筒长裤", "简洁皮鞋或低帮鞋"],
+        "reason": "近期学习信号集中在通勤与休闲正式感平衡。",
+    },
+}
+
 
 def _text(item: Dict[str, Any]) -> str:
     parts = [
@@ -22,15 +45,28 @@ def internet_style_suggestions(trends: List[Dict[str, Any]], candidate_rules: Li
         for rule in candidate_rules:
             if not isinstance(rule, dict):
                 continue
-            title = rule.get("title") or rule.get("rule") or rule.get("name")
-            reason = rule.get("reason") or rule.get("rationale") or rule.get("description")
-            if title:
+            rule_type = rule.get("rule_type")
+            formula = FORMULAS.get(rule_type)
+            if formula:
                 suggestions.append({
-                    "title": title,
-                    "reason": reason or "来自近期学习候选规则",
+                    "title": formula["title"],
+                    "formula": formula["formula"],
+                    "reason": formula["reason"],
                     "source": "candidate_rule",
-                    "confidence": rule.get("confidence"),
+                    "rule_type": rule_type,
+                    "evidence_count": rule.get("evidence_count", 0),
+                    "evidence": rule.get("evidence", [])[:3],
                 })
+            else:
+                title = rule.get("title") or rule.get("rule") or rule.get("name")
+                reason = rule.get("reason") or rule.get("rationale") or rule.get("description")
+                if title:
+                    suggestions.append({
+                        "title": title,
+                        "reason": reason or "来自近期学习候选规则",
+                        "source": "candidate_rule",
+                        "confidence": rule.get("confidence"),
+                    })
             if len(suggestions) >= limit:
                 return suggestions
 
