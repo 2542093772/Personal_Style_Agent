@@ -11,6 +11,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from vision.style_vision import analyze_frame as run_style_vision
+from vision.profile_extractor import extract_visual_profile
+from vision.profile_merge import merge_visual_profile
 
 app = Flask(__name__, static_folder=".")
 
@@ -35,6 +37,32 @@ def analyze_frame():
             payload,
             frame.mimetype or "image/jpeg",
         )
+        result["received_bytes"] = len(payload)
+        result["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
+        return jsonify(result)
+    except Exception as exc:
+        return jsonify({
+            "ok": False,
+            "error": str(exc),
+            "received_bytes": len(payload),
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        }), 500
+
+@app.post("/analyze-profile")
+def analyze_profile():
+    if "frame" not in request.files:
+        return jsonify({"ok": False, "error": "missing frame"}), 400
+
+    frame = request.files["frame"]
+    payload = frame.read()
+
+    try:
+        result = extract_visual_profile(
+            payload,
+            frame.mimetype or "image/jpeg",
+        )
+        if result.get("ok"):
+            result["merged_profile"] = merge_visual_profile(result["profile"])
         result["received_bytes"] = len(payload)
         result["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
         return jsonify(result)
