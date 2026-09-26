@@ -65,3 +65,37 @@ delivery:
 in `config/daily_assistant.yaml`.
 
 The scheduled GitHub Action can then push the daily plan and learning report without your PC being online.
+
+
+## Recommended local setup with .env
+
+Copy:
+
+```text
+telegram_bot/.env.example
+```
+
+to:
+
+```text
+telegram_bot/.env
+```
+
+Then fill:
+
+```text
+TELEGRAM_BOT_TOKEN=YOUR_TOKEN
+TELEGRAM_CHAT_ID=YOUR_CHAT_ID
+TELEGRAM_POLL_TIMEOUT=25
+```
+
+After that, the following commands automatically read the local env file:
+
+```powershell
+python telegram_bot/diagnose.py
+python telegram_bot/get_chat_id.py
+python telegram_bot/setup_commands.py
+python telegram_bot/bot.py
+```
+
+The real `telegram_bot/.env` is ignored by Git because `.env` is already covered by the repository `.gitignore`.
