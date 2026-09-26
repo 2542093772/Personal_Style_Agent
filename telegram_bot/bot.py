@@ -4,13 +4,17 @@ import time
 import urllib.parse
 import urllib.request
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from life.daily_planner import build_daily_plan
 from life.daily_briefing import render_daily_briefing
 from research.learning_report import render_learning_push_summary
 from life.weather_open_meteo import get_today_weather
 
-ROOT = Path(__file__).resolve().parents[1]
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
 POLL_TIMEOUT = int(os.getenv("TELEGRAM_POLL_TIMEOUT", "25"))
