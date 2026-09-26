@@ -3,9 +3,10 @@ import json
 
 from agent.style_agent import PersonalStyleAgent
 from tools.wardrobe import add_item
+from shopping.product_search import search_products
 
 def main():
-    parser = argparse.ArgumentParser(description="Personal Style Agent MVP")
+    parser = argparse.ArgumentParser(description="Personal Style Agent")
     sub = parser.add_subparsers(dest="command")
 
     p_add = sub.add_parser("add-item")
@@ -26,11 +27,21 @@ def main():
     p_fb.add_argument("--text", required=True)
     p_fb.add_argument("--score", type=float)
 
+    p_shop = sub.add_parser("shop")
+    p_shop.add_argument("--query", required=True)
+    p_shop.add_argument("--marketplace", choices=["jd", "tmall", "taobao", "dewu"])
+    p_shop.add_argument("--limit", type=int, default=10)
+
     args = parser.parse_args()
 
     if args.command == "add-item":
         item = add_item(args.name, args.type, args.color, args.temp_min, args.temp_max, args.avoid_rain)
         print(json.dumps(item, ensure_ascii=False, indent=2))
+        return
+
+    if args.command == "shop":
+        rows = search_products(args.query, args.marketplace, args.limit)
+        print(json.dumps(rows, ensure_ascii=False, indent=2))
         return
 
     agent = PersonalStyleAgent()
