@@ -38,6 +38,24 @@ def _reply_for(text: str) -> str:
     return "我目前先支持固定命令。\n\n" + command_help()
 
 
+def register_commands():
+    commands = [
+        {"command": "today", "description": "查看今天的穿搭与生活方案"},
+        {"command": "report", "description": "查看今日学习调查摘要"},
+        {"command": "wardrobe", "description": "查看当前衣柜状态"},
+        {"command": "shop", "description": "查看最值得补的单品与购买链接"},
+        {"command": "help", "description": "查看可用命令"},
+    ]
+    req = urllib.request.Request(
+        f"{BASE}/setMyCommands",
+        data=json.dumps({"commands": commands}, ensure_ascii=False).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
 def register_webhook():
     external_url = os.getenv("RENDER_EXTERNAL_URL", "").strip()
     if not external_url:
@@ -115,5 +133,7 @@ if os.getenv("RENDER", "").lower() == "true":
     try:
         result = register_webhook()
         print("Telegram webhook registration:", result, flush=True)
+        commands_result = register_commands()
+        print("Telegram command registration:", commands_result, flush=True)
     except Exception as exc:
         print("Telegram webhook registration failed:", repr(exc), flush=True)
