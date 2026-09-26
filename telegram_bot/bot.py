@@ -5,8 +5,11 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 import sys
+from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / ".env")
+load_dotenv(ROOT / "telegram_bot" / ".env")
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
