@@ -73,7 +73,7 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
         top_rules,
     )
 
-    purchase_advice = build_purchase_advice(include_live_links=False, limit=3)
+    purchase_advice = build_purchase_advice(include_live_links=True, limit=3)
 
     plan = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),

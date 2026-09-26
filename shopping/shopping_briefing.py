@@ -23,14 +23,12 @@ def render_purchase_advice(items: List[Dict[str, Any]], max_items=3) -> str:
             lines.append("候选链接：")
             for c in candidates[:3]:
                 title = (c.get("title") or "商品候选").strip()
-                lines.append(f"- {title}\n  {c.get('url')}")
+                platform = "淘宝" if c.get("marketplace") == "taobao" else "拼多多"
+                price = c.get("price_seen")
+                price_text = f"｜抓取价约 ¥{price}" if price else ""
+                lines.append(f"- [{platform}] {title}{price_text}\n  {c.get('url')}")
         else:
-            links = item.get("marketplace_links", {}) or {}
-            if links:
-                lines.append("搜索链接：")
-                for name, url in list(links.items())[:3]:
-                    if url:
-                        lines.append(f"- {name}: {url}")
+            lines.append("具体商品：本轮没有抓到可靠的淘宝/拼多多商品详情页，不用搜索页凑数。")
 
     lines += ["", "链接用于候选筛选；下单前仍需核对尺码、材质、卖家和当前价格。"]
     return "\n".join(lines)
