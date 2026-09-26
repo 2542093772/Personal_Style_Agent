@@ -3,7 +3,10 @@ import os
 import urllib.parse
 import urllib.request
 
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify, request
+
+from reports.daily_report import render_daily_html
+from life.daily_planner import build_daily_plan
 
 from telegram_bot.bot import (
     ALLOWED_CHAT_ID,
@@ -91,6 +94,21 @@ def index():
 @app.get("/health")
 def health():
     return jsonify({"ok": True})
+
+
+@app.get("/report/today")
+def report_today():
+    survey_path = os.path.join("reports", "daily_learning_survey.json")
+    survey = {}
+    try:
+        if os.path.exists(survey_path):
+            with open(survey_path, "r", encoding="utf-8") as fh:
+                survey = json.load(fh)
+    except Exception:
+        survey = {}
+
+    plan = build_daily_plan({})
+    return Response(render_daily_html(plan, survey), mimetype="text/html")
 
 
 @app.post("/telegram/webhook")

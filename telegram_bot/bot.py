@@ -19,6 +19,8 @@ from research.learning_report import render_learning_push_summary
 from life.weather_open_meteo import get_today_weather
 from shopping.ideal_wardrobe import build_purchase_advice
 from shopping.shopping_briefing import render_purchase_advice
+from reports.daily_report import build_today_report_file
+from notifications.telegram_document import send_document
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -79,10 +81,15 @@ def command_today():
 
 
 def command_report():
-    report = _json("reports/daily_learning_survey.json", {})
-    if not report:
-        return "今天还没有学习调查报告。可以先运行：python scheduler/jobs.py daily"
-    return render_learning_push_summary(report)
+    survey = _json("reports/daily_learning_survey.json", {})
+    weather = _weather_from_config()
+    plan = build_daily_plan({"weather": weather})
+    report_path = build_today_report_file(plan, survey)
+    send_document(
+        report_path,
+        caption="今日穿搭与学习报告｜完整方案 + 学习调查 + 采购链接",
+    )
+    return "完整日报已作为附件发送。"
 
 
 def command_wardrobe():
