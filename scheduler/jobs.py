@@ -11,6 +11,8 @@ from life.daily_briefing import render_daily_briefing
 from notifications.channel_router import push_message
 from life.weather_open_meteo import get_today_weather
 from research.learning_report import build_learning_survey, render_learning_survey_md, render_learning_push_summary
+from reports.daily_report import build_today_report_file
+from notifications.telegram_document import send_document
 import yaml
 
 REPORTS = Path("reports")
@@ -47,19 +49,26 @@ def daily_life_briefing():
     _write_json(REPORTS / "daily_life_plan.json", plan)
     (REPORTS / "daily_life_briefing.md").write_text(briefing, encoding="utf-8")
     channel = (((cfg or {}).get("delivery") or {}).get("channel", "auto"))
-    delivery = push_message(briefing, channel=channel)
-
     survey = _load_json(REPORTS / "daily_learning_survey.json", {})
-    learning_delivery = None
-    if survey:
-        learning_delivery = push_message(
-            render_learning_push_summary(survey),
-            channel=channel,
+    report_path = build_today_report_file(plan, survey)
+
+    summary_lines = ["今日穿搭与学习日报已生成。"]
+    if plan.get("optional_purchase_gap", {}).get("items"):
+        top = plan["optional_purchase_gap"]["items"][0]
+        summary_lines.append(f"当前优先补充：{top.get('priority')} {top.get('item')}")
+    summary_lines.append("完整方案、学习调查和淘宝/拼多多链接见附件。")
+    delivery = push_message("\n".join(summary_lines), channel=channel)
+
+    document_delivery = None
+    if channel == "telegram":
+        document_delivery = send_document(
+            report_path,
+            caption="今日穿搭与学习报告｜完整方案 + 学习调查 + 采购链接",
         )
 
     _write_json(REPORTS / "daily_delivery_status.json", {
-        "daily_plan": delivery,
-        "learning_report": learning_delivery,
+        "daily_summary": delivery,
+        "daily_report_document": document_delivery,
     })
     print(briefing)
     print(json.dumps(delivery, ensure_ascii=False, indent=2))
