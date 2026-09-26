@@ -1,5 +1,8 @@
 {
-  "local_date": null,
-  "context_key": null,
-  "status": "idle"
+  "local_date": "2026-09-27",
+  "context_key": "0c88b216533e0f7cc8fe",
+  "status": "completed",
+  "reason": "telegram:today",
+  "completed_at_utc": "2026-09-26T17:05:43.342352+00:00",
+  "report_path": "reports/daily_style_report.html"
 }
