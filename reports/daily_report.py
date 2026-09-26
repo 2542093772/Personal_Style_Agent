@@ -124,7 +124,7 @@ body{{margin:0;background:#f4f5f7;color:#171717;font-family:-apple-system,BlinkM
 section{{background:#fff;border-radius:18px;padding:22px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}}
 h2{{margin-top:0}} .item{{padding:14px 0;border-bottom:1px solid #eee}} .item:last-child{{border-bottom:0}}
 .muted{{color:#6b7280;font-size:14px}} .tag{{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;font-size:12px}}
-.product{padding:12px 0;border-top:1px dashed #e5e7eb}.buttons{{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}} .btn{{text-decoration:none;background:#111827;color:white;padding:8px 12px;border-radius:10px}}
+.product{{padding:12px 0;border-top:1px dashed #e5e7eb}}.buttons{{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}} .btn{{text-decoration:none;background:#111827;color:white;padding:8px 12px;border-radius:10px}}
 a{{color:#2563eb}}
 </style>
 </head>
