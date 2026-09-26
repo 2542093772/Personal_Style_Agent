@@ -2,3 +2,5 @@ PyYAML>=6.0
 ddgs>=9.0.0
 APScheduler>=3.10.4
 Flask>=3.0.0
+openai>=1.0.0
+python-dotenv>=1.0.0
