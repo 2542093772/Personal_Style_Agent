@@ -1,11 +1,11 @@
 {
-  "default_location": "铁岭",
-  "display_name": "铁岭",
-  "admin1": "黑龙江",
+  "default_location": "苏州",
+  "display_name": "苏州",
+  "admin1": "江苏",
   "country": "中国",
-  "latitude": 44.59153,
-  "longitude": 129.67776,
+  "latitude": 31.30408,
+  "longitude": 120.59538,
   "source": "telegram_message",
-  "source_text": "/location 铁岭",
-  "updated_at_utc": "2026-09-26T17:00:17.421136+00:00"
+  "source_text": "/location 苏州",
+  "updated_at_utc": "2026-09-26T17:00:29.717198+00:00"
 }
