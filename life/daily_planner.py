@@ -7,6 +7,7 @@ import yaml
 from life.outfit_recommender import build_outfit_recommendations
 from shopping.ideal_wardrobe import build_purchase_advice
 from personalizer.baseline_rules import build_baseline_rules
+from life.context_rules import weather_actions, weather_summary
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -88,6 +89,7 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
         },
         "today_context": {
             "weather": context.get("weather"),
+            "weather_summary": weather_summary(context.get("weather")),
             "schedule": context.get("schedule"),
             "occasion": context.get("occasion", "daily"),
             "notes": context.get("notes", []),
@@ -115,7 +117,7 @@ def build_daily_plan(context: Dict[str, Any] | None = None):
             "status": "use_existing_profile",
             "notes": [],
         },
-        "useful_reminders": [],
+        "useful_reminders": weather_actions(context.get("weather")),
         "optional_purchase_gap": {
             "should_buy": bool(purchase_advice),
             "reason": "Current wardrobe is sparse; recommendations are generated only for identified capsule-wardrobe gaps." if purchase_advice else "No core wardrobe gap identified.",
