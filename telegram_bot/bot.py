@@ -21,6 +21,7 @@ from shopping.ideal_wardrobe import build_purchase_advice
 from shopping.shopping_briefing import render_purchase_advice
 from reports.daily_report import build_today_report_file
 from notifications.telegram_document import send_document
+from runtime.daily_runtime import build_runtime_bundle
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 ALLOWED_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -75,15 +76,14 @@ def _weather_from_config():
 
 
 def command_today():
-    weather = _weather_from_config()
-    plan = build_daily_plan({"weather": weather})
-    return render_daily_briefing(plan)
+    bundle = build_runtime_bundle()
+    return render_daily_briefing(bundle["plan"])
 
 
 def command_report():
-    survey = _json("reports/daily_learning_survey.json", {})
-    weather = _weather_from_config()
-    plan = build_daily_plan({"weather": weather})
+    bundle = build_runtime_bundle()
+    survey = bundle["survey"]
+    plan = bundle["plan"]
     report_path = build_today_report_file(plan, survey)
     send_document(
         report_path,
