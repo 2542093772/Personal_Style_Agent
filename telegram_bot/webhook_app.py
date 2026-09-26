@@ -177,6 +177,18 @@ def telegram_webhook():
         ).start()
         return jsonify({"ok": True, "triggered_refresh": True})
 
+    # A normal human message also counts as today's first manual request.
+    # This lets phrases such as “今天穿什么” trigger preparation without requiring a slash command.
+    known_commands = {"/start", "/help", "/today", "/report", "/wardrobe", "/shop", "/location"}
+    if text and command not in known_commands and manual_refresh_needed():
+        send_message(chat_id, "收到你的当日需求，我先即时刷新今天的数据和方案，完成后直接发给你。")
+        threading.Thread(
+            target=deliver_refresh_result,
+            args=(chat_id, "today"),
+            daemon=True,
+        ).start()
+        return jsonify({"ok": True, "triggered_refresh": True})
+
     reply = _reply_for(text)
     send_message(chat_id, reply)
     return jsonify({"ok": True, "triggered_refresh": False})
