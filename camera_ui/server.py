@@ -1,9 +1,12 @@
 from flask import Flask, jsonify, request, send_from_directory
 from pathlib import Path
 from datetime import datetime, timezone
+from dotenv import load_dotenv
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT / "camera_ui" / ".env")
+
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
