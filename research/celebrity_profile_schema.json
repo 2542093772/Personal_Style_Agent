@@ -1,0 +1,30 @@
+{
+  "name": "",
+  "region": "",
+  "height_cm": null,
+  "body": {
+    "build": "",
+    "shoulder_width": "",
+    "torso_leg_ratio": "",
+    "head_body_ratio": ""
+  },
+  "face": {
+    "shape": "",
+    "visual_age": "",
+    "features": []
+  },
+  "hair": {
+    "length": "",
+    "volume": "",
+    "common_styles": []
+  },
+  "style": {
+    "archetypes": [],
+    "common_silhouettes": [],
+    "common_colors": [],
+    "common_shoes": [],
+    "signature_formulas": []
+  },
+  "evidence": [],
+  "confidence": 0.0
+}

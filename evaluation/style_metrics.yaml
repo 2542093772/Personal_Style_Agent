@@ -1,0 +1,15 @@
+metrics:
+  - proportion_balance
+  - age_reduction
+  - visual_slimming
+  - color_harmony
+  - occasion_fit
+  - weather_fit
+  - wardrobe_reuse
+  - source_reliability
+  - personal_relevance
+
+thresholds:
+  candidate_acceptance: 0.65
+  personal_adoption: 0.75
+  creator_reliability: 0.70

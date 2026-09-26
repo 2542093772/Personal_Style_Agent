@@ -1,0 +1,42 @@
+platforms:
+  xiaohongshu:
+    enabled: true
+    base_weight: 0.90
+  douyin:
+    enabled: true
+    base_weight: 0.85
+  bilibili:
+    enabled: true
+    base_weight: 0.80
+  youtube:
+    enabled: true
+    base_weight: 0.80
+  instagram:
+    enabled: true
+    base_weight: 0.75
+  editorial_media:
+    enabled: true
+    base_weight: 0.90
+
+creator_policy:
+  minimum_posts_observed: 12
+  minimum_consistency_score: 0.65
+  minimum_personal_relevance_score: 0.70
+  require_cross_post_consistency: true
+  penalize:
+    excessive_ads: 0.20
+    trend_chasing_without_explanation: 0.15
+    inconsistent_style_logic: 0.20
+    body_type_mismatch: 0.20
+  reward:
+    explains_proportion_logic: 0.20
+    shows_multiple_body_types: 0.15
+    repeatable_outfit_formulas: 0.20
+    seasonal_practicality: 0.15
+
+queries:
+  - "男生 穿搭 比例 显高 显瘦"
+  - "男生 通勤 穿搭 秋冬"
+  - "男生 日常 穿搭 干净 利落"
+  - "男明星 私服 穿搭 分析"
+  - "menswear proportions fit color coordination"

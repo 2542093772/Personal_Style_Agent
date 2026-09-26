@@ -1,0 +1,18 @@
+[
+  {
+    "id": "clean_youthful",
+    "description": "Clean, youthful, restrained styling with simple silhouettes and low visual clutter."
+  },
+  {
+    "id": "sharp_urban",
+    "description": "Sharper urban styling with structured outerwear, controlled proportions and stronger contrast."
+  },
+  {
+    "id": "relaxed_minimal",
+    "description": "Relaxed minimal styling using softer silhouettes and tonal coordination."
+  },
+  {
+    "id": "smart_casual",
+    "description": "Refined casual styling that bridges daily wear and semi-formal situations."
+  }
+]
