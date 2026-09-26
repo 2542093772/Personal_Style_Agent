@@ -12,12 +12,14 @@ from telegram_bot.bot import (
     ALLOWED_CHAT_ID,
     BASE,
     command_help,
+    command_location,
     command_report,
     command_shop,
     command_today,
     command_wardrobe,
     send_message,
 )
+from life.location_state import detect_location_update, update_default_location
 
 app = Flask(__name__)
 
@@ -38,6 +40,24 @@ def _reply_for(text: str) -> str:
         return command_wardrobe()
     if command == "/shop":
         return command_shop()
+    if command == "/location":
+        resolved = detect_location_update(text)
+        if resolved:
+            result = update_default_location(resolved, source_text=text)
+            state = result["state"]
+            persisted = result["persistence"].get("ok")
+            suffix = "，并已同步为后续日报默认地点。" if persisted else "。当前云实例已更新；要跨部署长期保存还需配置 GitHub 位置同步令牌。"
+            return f"默认地点已更新为：{state.get('display_name')}{suffix}"
+        return command_location()
+
+    resolved = detect_location_update(text)
+    if resolved:
+        result = update_default_location(resolved, source_text=text)
+        state = result["state"]
+        persisted = result["persistence"].get("ok")
+        suffix = "，并已同步为后续日报默认地点。" if persisted else "。当前云实例已更新；要跨部署长期保存还需配置 GitHub 位置同步令牌。"
+        return f"识别到你的位置变化，默认地点已更新为：{state.get('display_name')}{suffix}"
+
     return "我目前先支持固定命令。\n\n" + command_help()
 
 
