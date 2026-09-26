@@ -133,7 +133,17 @@ def handle_message(message):
 
 
 def main():
-    print("Telegram bot polling started. Ctrl+C to stop.")
+    print("Telegram bot starting...", flush=True)
+    try:
+        me = _get_json(f"{BASE}/getMe")
+        username = (me.get("result") or {}).get("username", "")
+        print(f"Telegram API connected. Bot: @{username}" if username else "Telegram API connected.", flush=True)
+    except Exception as exc:
+        print("Telegram API connection failed:", repr(exc), flush=True)
+        print("Run: python -u telegram_bot/diagnose.py", flush=True)
+        return
+
+    print("Telegram bot polling started. Ctrl+C to stop.", flush=True)
     offset = None
     while True:
         try:
@@ -144,10 +154,10 @@ def main():
                 if message:
                     handle_message(message)
         except KeyboardInterrupt:
-            print("Stopped.")
+            print("Stopped.", flush=True)
             break
         except Exception as exc:
-            print("Polling error:", exc)
+            print("Polling error:", repr(exc), flush=True)
             time.sleep(5)
 
 
