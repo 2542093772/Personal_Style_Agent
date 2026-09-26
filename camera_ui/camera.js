@@ -6,6 +6,9 @@ const profileBtn = document.getElementById("profileBtn");
 const analysisBtn = document.getElementById("analysisBtn");
 const statusEl = document.getElementById("status");
 const resultEl = document.getElementById("result");
+const collectStateEl = document.getElementById("collectState");
+const sampleCountEl = document.getElementById("sampleCount");
+const lastSampleEl = document.getElementById("lastSample");
 
 let stream = null;
 let analysisEnabled = false;
@@ -51,6 +54,7 @@ function stopCamera() {
   profileBtn.textContent = "开启持续视觉采集";
   analysisBtn.textContent = "开启实时穿搭分析";
   statusEl.textContent = "摄像头已停止";
+  collectStateEl.textContent = "未采集";
 }
 
 async function captureBlob() {
@@ -85,6 +89,9 @@ async function collectProfileSample() {
         latest_observation: data.profile
       }, null, 2);
       statusEl.textContent = "持续视觉采集中：正在累积你的稳定外形与比例特征。";
+      collectStateEl.textContent = "采集中";
+      sampleCountEl.textContent = stable.sample_count ?? 0;
+      lastSampleEl.textContent = new Date().toLocaleTimeString();
     } else {
       statusEl.textContent = "持续视觉采集失败，请检查模型配置。";
     }
@@ -110,6 +117,7 @@ function toggleProfileCollection() {
       profileTimer = null;
     }
     statusEl.textContent = "持续视觉采集已停止，但摄像头仍开启。";
+    collectStateEl.textContent = "已暂停";
   }
 }
 

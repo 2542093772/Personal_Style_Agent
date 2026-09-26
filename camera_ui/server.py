@@ -13,6 +13,7 @@ if str(ROOT) not in sys.path:
 from vision.style_vision import analyze_frame as run_style_vision
 from vision.profile_extractor import extract_visual_profile
 from vision.profile_collector import append_profile_observation
+from vision.profile_collector import _load as load_profile_data
 
 app = Flask(__name__, static_folder=".")
 
@@ -23,6 +24,14 @@ def index():
 @app.get("/camera.js")
 def camera_js():
     return send_from_directory(Path(__file__).parent, "camera.js")
+
+@app.get("/profile")
+def profile_page():
+    return send_from_directory(Path(__file__).parent, "profile.html")
+
+@app.get("/profile-data")
+def profile_data():
+    return jsonify(load_profile_data())
 
 @app.post("/analyze-frame")
 def analyze_frame():
