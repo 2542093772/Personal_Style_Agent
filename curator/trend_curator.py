@@ -34,10 +34,16 @@ def build_candidates():
                         "personal_relevance": 0.50,
                     })
                     item["evidence_count"] += 1
-                    if len(item["evidence"]) < 8:
+                    if batch.get("source_type") == "creator":
+                        item["source_reliability"] = max(item["source_reliability"], 0.82)
+                        item["personal_relevance"] = max(item["personal_relevance"], 0.72)
+                    if len(item["evidence"]) < 12:
                         item["evidence"].append({
                             "title": result.get("title", ""),
                             "url": result.get("url", ""),
+                            "source_type": batch.get("source_type", "generic"),
+                            "creator_id": batch.get("creator_id"),
+                            "creator_name": batch.get("creator_name"),
                         })
 
     candidates = list(buckets.values())
