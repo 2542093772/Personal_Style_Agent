@@ -15,10 +15,8 @@ on:
           - monthly
 
   schedule:
-    # Asia/Shanghai 01:30 = UTC 17:30 previous day: overnight internet learning
-    - cron: "30 17 * * *"
-    # Asia/Shanghai 07:45 = UTC 23:45 previous day: build and push morning report
-    - cron: "45 23 * * *"
+    # Daily learning/briefing are dispatched by the external Orchestrator.
+    # GitHub cron remains only for weekly/monthly maintenance.
     # Sunday 20:30 Asia/Shanghai = Sunday 12:30 UTC
     - cron: "30 12 * * 0"
     # 1st day 21:00 Asia/Shanghai = 13:00 UTC
@@ -33,7 +31,7 @@ jobs:
     env:
       DAILY_LEARNING_MINUTES: "30"
       DAILY_LEARNING_ROUND_INTERVAL_SECONDS: "240"
-    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily' || github.event_name == 'schedule' && github.event.schedule == '30 17 * * *'
+    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +49,7 @@ jobs:
           git push
 
   daily-briefing:
-    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily-briefing' || github.event_name == 'schedule' && github.event.schedule == '45 23 * * *'
+    if: github.event_name == 'workflow_dispatch' && inputs.job == 'daily-briefing'
     runs-on: ubuntu-latest
     env:
       LIFE_ASSISTANT_WEBHOOK_URL: ${{ secrets.LIFE_ASSISTANT_WEBHOOK_URL }}
