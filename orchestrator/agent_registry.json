@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "timezone": "Asia/Shanghai",
+  "agents": {
+    "style": {
+      "executor": "github_actions",
+      "workflow": "style-learning.yml",
+      "tasks": {
+        "overnight_learning": {
+          "workflow_input": "daily",
+          "schedule": "01:30",
+          "minimum_runtime_minutes": 30
+        },
+        "morning_brief": {
+          "workflow_input": "daily-briefing",
+          "schedule": "07:45"
+        },
+        "weekly_review": {
+          "workflow_input": "weekly",
+          "schedule": "Sunday 20:30"
+        },
+        "monthly_review": {
+          "workflow_input": "monthly",
+          "schedule": "day 1 21:00"
+        }
+      }
+    }
+  }
+}
