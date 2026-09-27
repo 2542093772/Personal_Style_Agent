@@ -41,7 +41,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python scheduler/jobs.py daily
+      - run: python -m scheduler.jobs daily
       - name: Commit daily learning output
         run: |
           git config user.name "personal-style-agent"
@@ -65,7 +65,14 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python scheduler/jobs.py daily-briefing
+      - name: Check Telegram delivery configuration
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "::warning::Telegram Actions secrets are not configured. The report can be generated, but Telegram delivery will be skipped."
+          else
+            echo "Telegram delivery configuration is present."
+          fi
+      - run: python -m scheduler.jobs daily-briefing
       - name: Commit daily life plan
         run: |
           git config user.name "personal-style-agent"
@@ -83,7 +90,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python scheduler/jobs.py weekly
+      - run: python -m scheduler.jobs weekly
       - name: Commit weekly review
         run: |
           git config user.name "personal-style-agent"
@@ -101,7 +108,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python scheduler/jobs.py monthly
+      - run: python -m scheduler.jobs monthly
       - name: Commit monthly personal review
         run: |
           git config user.name "personal-style-agent"

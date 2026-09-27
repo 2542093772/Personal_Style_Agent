@@ -1,9 +1,14 @@
 import argparse
 import json
 import os
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from curator.trend_curator import build_candidates
 from personalizer.monthly_personalizer import update_personal_rules
@@ -20,10 +25,10 @@ from research.creator_philosophy import build_creator_philosophies
 from research.creator_discovery import discover_creator_candidates, promote_qualified_candidates
 import yaml
 
-REPORTS = Path("reports")
-KNOWLEDGE = Path("knowledge")
-PERSONAL = Path("personal")
-DATA = Path("data")
+REPORTS = ROOT / "reports"
+KNOWLEDGE = ROOT / "knowledge"
+PERSONAL = ROOT / "personal"
+DATA = ROOT / "data"
 
 for p in (REPORTS, KNOWLEDGE, PERSONAL, DATA):
     p.mkdir(parents=True, exist_ok=True)
@@ -45,7 +50,7 @@ def _write_json(path, data):
 
 
 def daily_life_briefing():
-    cfg_path = Path("config/daily_assistant.yaml")
+    cfg_path = ROOT / "config" / "daily_assistant.yaml"
     cfg = yaml.safe_load(cfg_path.read_text(encoding="utf-8")) if cfg_path.exists() else {}
     state = get_location_state()
     location = get_default_location()
@@ -238,8 +243,8 @@ def weekly_review():
     candidates = build_candidates()
     philosophies = build_creator_philosophies()
     current = _load_json(KNOWLEDGE / "current_trends.json", [])
-    creators = _load_json("research/creators.json", [])
-    celebrities = _load_json("research/celebrity_profiles.json", [])
+    creators = _load_json(ROOT / "research" / "creators.json", [])
+    celebrities = _load_json(ROOT / "research" / "celebrity_profiles.json", [])
 
     report = {
         "run_type": "weekly_review",
