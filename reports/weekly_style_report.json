@@ -1,0 +1,14 @@
+{
+  "run_type": "weekly_review",
+  "timestamp_utc": "2026-09-27T17:09:52.915850+00:00",
+  "trend_batch_count": 0,
+  "candidate_rule_count": 0,
+  "creator_profile_count": 11,
+  "creator_candidate_count": 27,
+  "new_creator_count": 0,
+  "profiled_creator_count": 0,
+  "cross_creator_consensus_count": 0,
+  "celebrity_profile_count": 0,
+  "policy": "review_and_score_only_no_personal_rule_promotion",
+  "candidate_rules": []
+}

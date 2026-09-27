@@ -1,1 +1,599 @@
-[]
+[
+  {
+    "id": "mens_capsule_wardrobe",
+    "name": "Mens Capsule Wardrobe",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:46.411978+00:00",
+    "last_seen_utc": "2026-09-27T17:09:52.910863+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "menswear capsule wardrobe creator Instagram",
+        "title": "Mens Capsule Wardrobe - Instagram",
+        "url": "https://www.instagram.com/popular/mens-capsule-wardrobe/",
+        "snippet": "@miko_ps recommends starting with a tight color palette and quality basics for a men’s capsule wardrobe. Core pieces include 2-3 t-shirts, Oxford shirts, a navy blazer, chinos, dark denim, loafers, and white sneakers, all designed to mix an"
+      },
+      {
+        "query": "menswear capsule wardrobe creator Instagram",
+        "title": "Mens Capsule Wardrobe - Instagram",
+        "url": "https://www.instagram.com/popular/mens-capsule-wardrobe/",
+        "snippet": "@miko_ps recommends starting with a tight color palette and quality basics for a men's capsule wardrobe. Core pieces include 2-3 t-shirts, Oxford shirts, a navy blazer, chinos, dark denim, loafers, and white sneakers, all designed to mix an"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.69,
+    "auto_promote": false
+  },
+  {
+    "id": "capsule_wardrobe_for_men",
+    "name": "Capsule Wardrobe For Men",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:46.412095+00:00",
+    "last_seen_utc": "2026-09-27T17:09:46.412098+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "menswear capsule wardrobe creator Instagram",
+        "title": "Capsule Wardrobe For Men | New Outfits For Men (@capsulewardrobemen) • Instagram photos and videos",
+        "url": "https://www.instagram.com/capsulewardrobemen/",
+        "snippet": "430K Followers, 113 Following, 3,695 Posts - Capsule Wardrobe For Men | New Outfits For Men (@capsulewardrobemen) on Instagram: \"Outfits to help men dress well Dress better than your friends 👇\""
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.69,
+    "auto_promote": false
+  },
+  {
+    "id": "next_menswear",
+    "name": "Next Menswear",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:46.412044+00:00",
+    "last_seen_utc": "2026-09-27T17:09:52.910892+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "menswear capsule wardrobe creator Instagram",
+        "title": "Next Menswear | You only need these 10 items to create the ...",
+        "url": "https://www.instagram.com/reel/DclTvdZCOiB/",
+        "snippet": "102 likes, 8 comments - nextman on August 28, 2026: \"You only need these 10 items to create the ultimate capsule wardrobe #nextman\"."
+      },
+      {
+        "query": "menswear capsule wardrobe creator Instagram",
+        "title": "Next Menswear | You only need these 10 items to create the ... - Instagram",
+        "url": "https://www.instagram.com/reel/DclTvdZCOiB/",
+        "snippet": "102 likes, 8 comments - nextman on August 28, 2026: \"You only need these 10 items to create the ultimate capsule wardrobe #nextman\"."
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.61,
+    "auto_promote": false
+  },
+  {
+    "id": "how_to_look_taller",
+    "name": "How to Look Taller",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:44.067699+00:00",
+    "last_seen_utc": "2026-09-27T17:09:51.304704+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "How to Look Taller | 7 Fashion Tips for Short Men - YouTube",
+        "url": "https://www.youtube.com/watch?v=Ca9EvYNzaRg",
+        "snippet": "Want to look taller and more stylish? In this video, I'm sharing 7 practical fashion tips for short men to improve your proportions and overall style."
+      },
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "How to Look Taller | 7 Fashion Tips for Short Men - YouTube20 Best Men’s Fashion YouTubers - Man of Many25 Mens Fashion YouTubers You Must Follow in 202610 YouTube Channels Better Than RMRS? | Best Men's Style ...Top 10 Men Fashion Youtubers to Watch in 2025 - BeaconsYouTube Video Ideas for Mens Fashion: 8 Content Concepts That ...",
+        "url": "https://www.youtube.com/watch?v=Ca9EvYNzaRg",
+        "snippet": "3 days ago · Want to look taller and more stylish? In this video, I’m sharing 7 practical fashion tips for short men to improve your proportions and overall style. Aug 8, 2025 · From vloggers like Tom Dessaint to models like Tim Bryan, they"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.61,
+    "auto_promote": false
+  },
+  {
+    "id": "youtube_video_ideas_for_mens_fashion",
+    "name": "YouTube Video Ideas for Mens Fashion",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:44.067761+00:00",
+    "last_seen_utc": "2026-09-27T17:09:51.304818+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "YouTube Video Ideas for Mens Fashion: 8 Content Concepts That Get Views ...",
+        "url": "https://vuereka.com/blog/youtube-video-ideas-for-mens-fashion",
+        "snippet": "Need youtube video ideas for mens fashion? Steal these 8 formats with outfit formulas, fit checks, shopping guides, and style upgrades that creators can film weekly."
+      },
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "YouTube Video Ideas for Mens Fashion: 8 Content Concepts That ...",
+        "url": "https://vuereka.com/blog/youtube-video-ideas-for-mens-fashion",
+        "snippet": "Feb 19, 2026 · Need youtube video ideas for mens fashion? Steal these 8 formats with outfit formulas, fit checks, shopping guides, and style upgrades that creators can film weekly."
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.53,
+    "auto_promote": false
+  },
+  {
+    "id": "10_youtube_channels_better_than_rmrs",
+    "name": "10 YouTube Channels Better Than RMRS?",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:44.067798+00:00",
+    "last_seen_utc": "2026-09-27T17:09:51.304789+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "10 YouTube Channels Better Than RMRS? | Best Men's Style YouTubers",
+        "url": "https://www.realmenrealstyle.com/style-youtube-channels/",
+        "snippet": "If you want guidance on dandy or vintage outfits, this is the channel to visit. Bonus Style YouTube Channel: Teaching Men's Fashion Brothers Jose and Juan Zuniga are two fine fellows who've been making their mark on the men's style industry"
+      },
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "10 YouTube Channels Better Than RMRS? | Best Men's Style ...",
+        "url": "https://www.realmenrealstyle.com/style-youtube-channels/",
+        "snippet": "Jun 21, 2024 · If you want guidance on dandy or vintage outfits, this is the channel to visit. Bonus Style YouTube Channel: Teaching Men's Fashion Brothers Jose and Juan Zuniga are two fine fellows who've been making their mark on the men's"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.53,
+    "auto_promote": false
+  },
+  {
+    "id": "新年焕新颜_b站18个干活满满的_穿搭塑形类_up主推荐_由内而外改变自己",
+    "name": "新年焕新颜，B站18个干活满满的『 穿搭塑形类』up主推荐，由内而外改变自己",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168585+00:00",
+    "last_seen_utc": "2026-09-27T17:09:42.168587+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "新年焕新颜，B站18个干活满满的『 穿搭塑形类』up主推荐，由内而外改变自己__什么值得买",
+        "url": "https://post.smzdm.com/p/aekzwlz4/",
+        "snippet": "February 3, 2020 - 解说非常的沙雕的一个穿搭类UP主，在搭配潮装时有自己一套独特的风格，从搭配穿衣风格，到着装款式与版型的选择，到穿衣的搭配，从春夏的简单搭配，到秋冬的羽绒服、风衣搭配，即使是18元的T恤衫都可以搭配得非常fashion，从鞋子到衣服，从帽子到手表，统统都有搭配的推荐。"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.53,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书粉丝220万_单场直播带货百万_刘小被儿不是盖的_怎么做基础穿搭",
+    "name": "小红书粉丝220万，单场直播带货百万！“刘小被儿不是盖的”怎么做基础穿搭？",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011187+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011201+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书粉丝220万，单场直播带货百万！“刘小被儿不是盖的”怎么做基础穿搭？| 新榜专访",
+        "url": "https://www.peopleapp.com/rmharticle/30023468681",
+        "snippet": "账号的运营者小被儿留一头短发，长相神似演员宋轶，笑容甜美有亲和力，从2017年至今，做穿搭博主已经5年。 ... 小被儿推崇“用最少的单品打造出最多的造型”，所以她的穿搭以基本款为主，极少穿网红爆款，也避免繁复的款式。 · 从早期的“每日穿搭”图片，到后来的“胶囊衣橱”“一衣多穿”“一条裤子/裙子/外套的X种穿法”等穿搭视频，刘小被把一件单品穿出了不同的风格。"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.53,
+    "auto_promote": false
+  },
+  {
+    "id": "你是什么长相_就看什么博主_43位男装穿搭博主推荐分享",
+    "name": "你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168404+00:00",
+    "last_seen_utc": "2026-09-27T17:09:47.952784+00:00",
+    "evidence_count": 4,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~_哔哩哔哩_bi...你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~-落落的穿搭...馆长穿搭日记的个人空间-馆长穿搭日记个人主页-哔哩哔哩视频落落的穿搭笔记_百度百科推荐几个男生一定要关注的穿搭博主！ - 知乎男装研究所的个人空间-男装研究所个人主页-哔哩哔哩视频b站有哪些值得推荐的男士穿搭up主？ - 知乎",
+        "url": "https://www.bilibili.com/video/BV1CtC2YpEE7/",
+        "snippet": "Oct 18, 2024 · 课程总结 收起全部章节 关闭课程总结 暂无课程总结 秋日穿搭LookBook 男装 服饰 穿搭 男生 博主 长相 男生穿搭 穿搭博主 秋日chill一下 征稿奖励 落落的穿搭笔记 你的专属形象管理师，持证上岗哦 公众号：落落的穿搭笔记 合作联系:cc003341 关注 74.8万 Oct 18, 2024 · 落落的穿搭笔记创建的收藏夹落落的穿搭笔记内容：你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~，如果您对当前收藏夹内容感兴趣点击“"
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~-落落的穿搭...",
+        "url": "https://www.bilibili.com/list/1833357828?oid=113327493680406&bvid=BV1CtC2YpEE7",
+        "snippet": "Oct 18, 2024 · 落落的穿搭笔记创建的收藏夹落落的穿搭笔记内容：你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~，如果您对当前收藏夹内容感兴趣点击“收藏”可转入个人收藏夹方便浏览"
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~_哔哩哔哩_bi...你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~-落落的穿搭...馆长穿搭日记的个人空间-馆长穿搭日记个人主页-哔哩哔哩视频落落的穿搭笔记_百度百科推荐几个男生一定要关注的穿搭博主！ - 知乎男装研究所的个人空间-男装研究所个人主页-哔哩哔哩视频b站有哪些值得推荐的男士穿搭up主？ - 知乎",
+        "url": "https://www.bilibili.com/video/BV1CtC2YpEE7/",
+        "snippet": "Oct 18, 2024 · 课程总结 收起全部章节 关闭课程总结 暂无课程总结 秋日穿搭LookBook 男装 服饰 穿搭 男生 博主 长相 男生穿搭 穿搭博主 秋日chill一下 征稿奖励 落落的穿搭笔记 你的专属形象管理师，持证上岗哦 公众号：落落的穿搭笔记 合作联系:cc003341 关注 74.8万 Oct 18, 2024 · 落落的穿搭笔记创建的收藏夹落落的穿搭笔记内容：你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~，如果您对当前收藏夹内容感兴趣点击“"
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~-落落的穿搭...",
+        "url": "https://www.bilibili.com/list/1833357828?oid=113327493680406&bvid=BV1CtC2YpEE7",
+        "snippet": "Oct 18, 2024 · 落落的穿搭笔记创建的收藏夹落落的穿搭笔记内容：你是什么长相，就看什么博主！43位男装穿搭博主推荐分享~，如果您对当前收藏夹内容感兴趣点击“收藏”可转入个人收藏夹方便浏览"
+      }
+    ],
+    "consistency_score": 0.51,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "b站有哪些值得推荐的男士穿搭up主",
+    "name": "b站有哪些值得推荐的男士穿搭up主？",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168457+00:00",
+    "last_seen_utc": "2026-09-27T17:09:47.952862+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "b站有哪些值得推荐的男士穿搭up主？ - 知乎",
+        "url": "https://www.zhihu.com/question/388451560",
+        "snippet": "April 16, 2020 - 我是服装从业者，这么跟你说吧，不用看那些穿搭up，你没事多关注一下潮流咨询，当季流行元素和色系，在自己的日常中有这些元素即可。不知道怎么搭配，你如果敢穿，就根据各快时尚模特搭配去搭配，不敢穿你就按照..."
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "b站有哪些值得推荐的男士穿搭up主？ - 知乎",
+        "url": "https://www.zhihu.com/question/388451560",
+        "snippet": "Apr 17, 2020 · 这里吹一波我环卫工穿搭代表风格人物——B站：得体李老师 冷嘲热讽别装逼，言行举止要得体 不论你是 潮流文化 爱好者还是想了解穿搭文化，《冷嘲热讽》绝对不容错过 欢迎来 击剑 ～"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "馆长穿搭日记的个人空间",
+    "name": "馆长穿搭日记的个人空间",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168498+00:00",
+    "last_seen_utc": "2026-09-27T17:09:47.952802+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "馆长穿搭日记的个人空间-馆长穿搭日记个人主页-哔哩哔哩视频",
+        "url": "https://space.bilibili.com/3493263927413405",
+        "snippet": "哔哩哔哩馆长穿搭日记的个人空间，提供馆长穿搭日记分享的视频、音频、文章、动态、收藏等内容，关注馆长穿搭日记账号，第一时间了解UP主动态。这里是馆长の穿搭日记，兼职做模特的英俊美男子，每周分享穿搭教程，拯救你的直男审美。合作：gz20240122"
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "馆长穿搭日记的个人空间-馆长穿搭日记个人主页-哔哩哔哩视频",
+        "url": "https://space.bilibili.com/3493263927413405",
+        "snippet": "哔哩哔哩馆长穿搭日记的个人空间，提供馆长穿搭日记分享的视频、音频、文章、动态、收藏等内容，关注馆长穿搭日记账号，第一时间了解UP主动态。这里是馆长の穿搭日记，兼职做模特的英俊美男子，每周分享穿搭教程，拯救你的直男审美。合作：gz20240122"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "落落的穿搭笔记",
+    "name": "落落的穿搭笔记",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168512+00:00",
+    "last_seen_utc": "2026-09-27T17:09:47.952817+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "落落的穿搭笔记_百度百科",
+        "url": "https://baike.baidu.com/item/落落的穿搭笔记/65935617",
+        "snippet": "落落的穿搭笔记是96年出生的B站95后女性UP主，在B站教男生穿搭、护肤、发型。 为了精进专业技能，她考取了形象管理师职业人才技能证书。 [18]截至2026年1月，其B站关注数达64.6万，视频描述自称“你的专属形象管理师，持证上岗哦”。"
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "落落的穿搭笔记_百度百科",
+        "url": "https://baike.baidu.com/item/落落的穿搭笔记/65935617",
+        "snippet": "落落的穿搭笔记是96年出生的B站95后女性UP主，在B站教男生穿搭、护肤、发型。 为了精进专业技能，她考取了形象管理师职业人才技能证书。 [18]截至2026年1月，其B站关注数达64.6万，视频描述自称“你的专属形象管理师，持证上岗哦”。"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "推荐几个男生一定要关注的穿搭博主",
+    "name": "推荐几个男生一定要关注的穿搭博主！",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168527+00:00",
+    "last_seen_utc": "2026-09-27T17:09:47.952833+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "推荐几个男生一定要关注的穿搭博主！ - 知乎",
+        "url": "https://zhuanlan.zhihu.com/p/483228474",
+        "snippet": "Mar 21, 2022 · 博主落落是个超级可爱的小姐姐，头像即本人！ 不得不说， 只有女生才知道怎么改造男生， 落落对于男生穿搭审美简直绝了 关键是非常非常专业！！ 公众号的更新速度很快了，基本1～2天一更 点击主页下方有 【穿搭干货】 所有想认真学习的男生，一定要给我点开这个栏目， 是我所有男装公众号 ..."
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "推荐几个男生一定要关注的穿搭博主！ - 知乎",
+        "url": "https://zhuanlan.zhihu.com/p/483228474",
+        "snippet": "Mar 21, 2022 · 博主落落是个超级可爱的小姐姐，头像即本人！ 不得不说， 只有女生才知道怎么改造男生， 落落对于男生穿搭审美简直绝了 关键是非常非常专业！！ 公众号的更新速度很快了，基本1～2天一更 点击主页下方有 【穿搭干货】 所有想认真学习的男生，一定要给我点开这个栏目， 是我所有男装公众号 ..."
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "男装研究所的个人空间",
+    "name": "男装研究所的个人空间",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168541+00:00",
+    "last_seen_utc": "2026-09-27T17:09:47.952848+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "男装研究所的个人空间-男装研究所个人主页-哔哩哔哩视频",
+        "url": "https://space.bilibili.com/279034165",
+        "snippet": "哔哩哔哩男装研究所的个人空间，提供男装研究所分享的视频、音频、文章、动态、收藏等内容，关注男装研究所账号，第一时间了解UP主动态。分享各种低价高质的男装品牌，让男生花更少的钱，穿得更好"
+      },
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "男装研究所的个人空间-男装研究所个人主页-哔哩哔哩视频",
+        "url": "https://space.bilibili.com/279034165",
+        "snippet": "哔哩哔哩男装研究所的个人空间，提供男装研究所分享的视频、音频、文章、动态、收藏等内容，关注男装研究所账号，第一时间了解UP主动态。分享各种低价高质的男装品牌，让男生花更少的钱，穿得更好"
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "20_best_men_s_fashion_youtubers",
+    "name": "20 Best Men's Fashion YouTubers",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:44.067740+00:00",
+    "last_seen_utc": "2026-09-27T17:09:51.304752+00:00",
+    "evidence_count": 2,
+    "evidence": [
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "20 Best Men's Fashion YouTubers - Man of Many",
+        "url": "https://manofmany.com/style/best-mens-fashion-youtubers",
+        "snippet": "From vloggers like Tom Dessaint to models like Tim Bryan, they're the best men's fashion YouTubers and they're on a computer screen near you."
+      },
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "20 Best Men’s Fashion YouTubers - Man of Many",
+        "url": "https://manofmany.com/style/best-mens-fashion-youtubers",
+        "snippet": "Aug 8, 2025 · From vloggers like Tom Dessaint to models like Tim Bryan, they're the best men's fashion YouTubers and they're on a computer screen near you."
+      }
+    ],
+    "consistency_score": 0.43,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "b站有哪些值得推荐的男装up主",
+    "name": "B站有哪些值得推荐的男装UP主？",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168555+00:00",
+    "last_seen_utc": "2026-09-27T17:09:42.168557+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "B站有哪些值得推荐的男装UP主？ - 知乎",
+        "url": "https://www.zhihu.com/question/271471552",
+        "snippet": "首先是男装，我关注的很少。 · 推荐：明星造型师小邱"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "b站up主以及视频推荐",
+    "name": "B站UP主以及视频推荐",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:42.168568+00:00",
+    "last_seen_utc": "2026-09-27T17:09:42.168571+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "优秀 男装 穿搭 博主 比例 版型 B站",
+        "title": "B站UP主以及视频推荐 - 路口",
+        "url": "https://www.lukou.com/userfeed/32198004",
+        "snippet": "March 7, 2021 - 一、B站UP主推荐 ...分娩https://b23.tv/oqDN39真的超级不容易。13、呀呀呀甜鹅 推荐，很喜欢她的穿搭风格14、大呸湿 误入的男装博主，哈哈，应该也是东北的，视频比较干货，比较适合大只一点的男生。1..."
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书上有哪些值得关注的时尚博主",
+    "name": "小红书上有哪些值得关注的时尚博主？",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011229+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011234+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书上有哪些值得关注的时尚博主？ - 知乎",
+        "url": "https://www.zhihu.com/question/67443499",
+        "snippet": "October 30, 2017 - 作为一个每天一刷小红书就是三小时停不下来的人感觉必须回答一下这个问题。 · 看到之前大家推荐的主要都是女生博主比较多一点，所以这里主要推一些男生可以follow起来的（女生也可以帮男朋友关注起来呀 ... 如果想要看一些关于时尚穿搭类的笔记，@荷兰野模绝对是必须关注的小红书男生之一，他的穿衣风格比较简单清爽，但是很有个人风格，对于普通大学男生很有参考价值。（P.S.这个博主真的颜值很在线，个人觉得女生也可以关注）"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书_潮人日记_发布",
+    "name": "小红书「潮人日记」发布",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011250+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011253+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书「潮人日记」发布：潮流穿搭，就在小红书 - 数英",
+        "url": "https://www.digitaling.com/projects/190574.html",
+        "snippet": "除了平台视角，小红书还联合知名潮流生活媒体NOWRE，邀请30+潮流行业大咖，涵盖设计师、艺术家、音乐人、潮流博主等多个领域的意见领袖，围绕潮流生活、潮流艺术、潮流设计、潮流穿搭、潮流文化五个维度，发布2021年度潮流盘点，从行业视角讨论年轻人都在「玩什么」，回顾这一年潮流在多领域的蓬勃发展，也寻找下一个潮流新风口。"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书爆款案例分享_利郎",
+    "name": "小红书爆款案例分享！利郎",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011267+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011270+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书爆款案例分享！利郎：用男友力穿搭，撬动新人群扩圈 - 知乎",
+        "url": "https://zhuanlan.zhihu.com/p/25426881809",
+        "snippet": "February 21, 2025 - (*^__^*) 嘻嘻……，小红书新人第1课，如何成为一个穿搭博主。 第一：成为穿搭博主的注意事项 并不是一定要颜值高，但是一定要有自己的风格。 穿搭博主账号一定要垂直，都发穿搭的。 一定要…"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书有哪些值得关注的穿搭博主",
+    "name": "小红书有哪些值得关注的穿搭博主？",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011282+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011284+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书有哪些值得关注的穿搭博主？ - 知乎",
+        "url": "https://www.zhihu.com/question/297141688",
+        "snippet": "小红书的穿搭博主还挺多的，但是真的能从中学到穿搭技巧和品味的真的不多，我混小红书也有几年了，讲几个我觉得不错的吧 · ——————————"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "多巴胺穿搭_带动涨粉44万_小红书博主越玩越花",
+    "name": "“多巴胺穿搭”带动涨粉44万，小红书博主越玩越花",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011297+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011300+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "“多巴胺穿搭”带动涨粉44万，小红书博主越玩越花 | 运营派",
+        "url": "https://www.yunyingpai.com/xhs/930319.html",
+        "snippet": "你知道最近小红书网红发生了怎样的变化吗？本篇文章从小红书五月涨粉榜出发，详细介绍了几位变化最大的网红，推荐想了解小红书运营的同学阅读。 · 小红书五月涨粉榜已出，我们先来看榜："
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书男生穿搭达人推荐_小红书上有名的穿搭博主男",
+    "name": "小红书男生穿搭达人推荐（小红书上有名的穿搭博主男）",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011312+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011314+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书男生穿搭达人推荐（小红书上有名的穿搭博主男）-加一种草",
+        "url": "https://yx.jiayisiyu.com/blog/post/20685.html",
+        "snippet": "February 19, 2023 - 伊森汉是作为一名男士一定要关注的一位博主，近十万的粉丝量也能够说明伊森汉这位博主的影响力，虽然这个粉丝量对动辄几百万的女性博主来说不算什么，但是在普遍不注意形象的男士中，这个体量已经很不错了，他..."
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书博主推荐穿搭",
+    "name": "小红书博主推荐穿搭",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011324+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011326+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书博主推荐穿搭",
+        "url": "https://www.douyin.com/search/小红书博主推荐穿搭",
+        "snippet": "May 1, 2026 - 开启读屏标签 · 读屏标签已关闭 · 精选 · 推荐 · 关注 · 朋友 · 我的 · 小游戏 · 下载抖音精选 · 2026 © 抖音"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书穿搭达人男生推荐_小红书上男士穿搭博主",
+    "name": "小红书穿搭达人男生推荐（小红书上男士穿搭博主）",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011338+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011340+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书穿搭达人男生推荐（小红书上男士穿搭博主）-加一种草",
+        "url": "https://yx.jiayisiyu.com/blog/post/21019.html",
+        "snippet": "February 22, 2023 - 伊森汉是作为一名男士一定要关注的一位博主，近十万的粉丝量也能够说明伊森汉这位博主的影响力，虽然这个粉丝量对动辄几百万的女性博主来说不算什么，但是在普遍不注意形象的男士中，这个体量已经很不错了，他..."
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "小红书穿搭新手博主写作方向指南_别再只是单纯拍穿搭了",
+    "name": "小红书穿搭新手博主写作方向指南！别再只是单纯拍穿搭了！",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:43.011390+00:00",
+    "last_seen_utc": "2026-09-27T17:09:43.011394+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "男生 穿搭 博主 胶囊衣橱 小红书",
+        "title": "小红书穿搭新手博主写作方向指南！别再只是单纯拍穿搭了！-鸟哥笔记",
+        "url": "https://www.niaogebiji.com/article-54414-1.html",
+        "snippet": "February 26, 2020 - 鸟哥笔记-讲述营销的故事"
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  },
+  {
+    "id": "top_10_best_men_s_style_youtube_channels",
+    "name": "Top 10 Best Men's Style YouTube Channels",
+    "status": "candidate",
+    "first_seen_utc": "2026-09-27T17:09:44.067782+00:00",
+    "last_seen_utc": "2026-09-27T17:09:44.067785+00:00",
+    "evidence_count": 1,
+    "evidence": [
+      {
+        "query": "menswear creator outfit proportions YouTube",
+        "title": "Top 10 Best Men's Style YouTube Channels - 40 Over Fashion",
+        "url": "https://40overfashion.com/top-10-best-mens-style-youtube-channels/",
+        "snippet": "Today, I'd like to share with you a few men's style YouTube channels, some small and some not to small, that I follow and I think you might find interest in as well."
+      }
+    ],
+    "consistency_score": 0.39,
+    "personal_relevance_score": 0.45,
+    "auto_promote": false
+  }
+]

@@ -1,7 +1,172 @@
 {
-  "generated_at_utc": null,
-  "creator_count": 0,
+  "generated_at_utc": "2026-09-27T17:09:52.914914+00:00",
+  "creator_count": 11,
   "profiled_creator_count": 0,
-  "profiles": {},
+  "profiles": {
+    "tim_dessaint": {
+      "creator_id": "tim_dessaint",
+      "creator_name": "Tim Dessaint",
+      "role": "core_method",
+      "focus_declared": [
+        "capsule_wardrobe",
+        "minimal_menswear",
+        "proportion",
+        "outfit_formulas"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914867+00:00"
+    },
+    "daniel_simmons": {
+      "creator_id": "daniel_simmons",
+      "creator_name": "Daniel Simmons",
+      "role": "core_method",
+      "focus_declared": [
+        "neutral_palette",
+        "modern_minimal",
+        "seasonal_layering",
+        "tailored_casual"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914879+00:00"
+    },
+    "harry_has": {
+      "creator_id": "harry_has",
+      "creator_name": "Harry Has",
+      "role": "core_method",
+      "focus_declared": [
+        "straight_fit",
+        "casual_menswear",
+        "fit",
+        "accessible_outfits"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914884+00:00"
+    },
+    "parker_york_smith": {
+      "creator_id": "parker_york_smith",
+      "creator_name": "Parker York Smith",
+      "role": "core_method",
+      "focus_declared": [
+        "styling_basics",
+        "proportion",
+        "accessible_style",
+        "confidence"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914887+00:00"
+    },
+    "brock_mcgoff": {
+      "creator_id": "brock_mcgoff",
+      "creator_name": "Brock McGoff / The Modest Man",
+      "role": "core_method",
+      "focus_declared": [
+        "fit",
+        "shorter_men",
+        "capsule_wardrobe",
+        "wardrobe_basics"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914890+00:00"
+    },
+    "real_men_real_style": {
+      "creator_id": "real_men_real_style",
+      "creator_name": "Antonio Centeno / Real Men Real Style",
+      "role": "core_method",
+      "focus_declared": [
+        "fit",
+        "fabric",
+        "dress_codes",
+        "wardrobe_strategy"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914894+00:00"
+    },
+    "wisdom_kaye": {
+      "creator_id": "wisdom_kaye",
+      "creator_name": "Wisdom Kaye",
+      "role": "trend_visual",
+      "focus_declared": [
+        "editorial_menswear",
+        "silhouette",
+        "color",
+        "high_fashion"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914897+00:00"
+    },
+    "jordan_obrien": {
+      "creator_id": "jordan_obrien",
+      "creator_name": "Jordan O'Brien",
+      "role": "trend_visual",
+      "focus_declared": [
+        "casual_menswear",
+        "street_style",
+        "outfit_inspiration"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914900+00:00"
+    },
+    "chammy": {
+      "creator_id": "chammy",
+      "creator_name": "痴五安chammy",
+      "role": "core_method",
+      "focus_declared": [
+        "small_frame",
+        "capsule_wardrobe",
+        "basics",
+        "layering",
+        "proportion"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914903+00:00"
+    },
+    "chen_gengxin": {
+      "creator_id": "chen_gengxin",
+      "creator_name": "陈更新不常更新",
+      "role": "practical_case",
+      "focus_declared": [
+        "172cm_outfits",
+        "basics",
+        "weekly_outfits",
+        "commute"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914906+00:00"
+    },
+    "alu": {
+      "creator_id": "alu",
+      "creator_name": "阿鲁阿鲁aLu",
+      "role": "practical_case",
+      "focus_declared": [
+        "menswear_commentary",
+        "outfit_review",
+        "proportion"
+      ],
+      "philosophies": [],
+      "dominant_themes": [],
+      "evidence_total": 0,
+      "updated_at_utc": "2026-09-27T17:09:52.914909+00:00"
+    }
+  },
   "cross_creator_consensus": []
 }
