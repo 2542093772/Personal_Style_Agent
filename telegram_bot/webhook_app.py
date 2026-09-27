@@ -22,6 +22,7 @@ from telegram_bot.bot import (
 )
 from life.location_state import detect_location_update, update_default_location
 from runtime.manual_trigger import manual_refresh_needed, deliver_refresh_result
+from orchestrator.dispatcher import dispatch, get_registry
 
 app = Flask(__name__)
 
@@ -192,6 +193,32 @@ def telegram_webhook():
     reply = _reply_for(text)
     send_message(chat_id, reply)
     return jsonify({"ok": True, "triggered_refresh": False})
+
+
+
+@app.get("/orchestrator/status")
+def orchestrator_status():
+    return jsonify({
+        "ok": True,
+        "service": "Personal Life Orchestrator",
+        "registry": get_registry(),
+    })
+
+
+@app.post("/orchestrator/dispatch/<agent>/<task>")
+def orchestrator_dispatch(agent, task):
+    supplied = request.headers.get("X-Orchestrator-Secret", "")
+    secret = os.getenv("ORCHESTRATOR_SECRET", "").strip()
+    if not secret or supplied != secret:
+        return jsonify({"ok": False, "error": "forbidden"}), 403
+
+    try:
+        result = dispatch(agent, task, source="external_scheduler")
+        return jsonify(result), (200 if result.get("ok") else 502)
+    except ValueError as exc:
+        return jsonify({"ok": False, "error": str(exc)}), 404
+    except Exception as exc:
+        return jsonify({"ok": False, "error": repr(exc)}), 500
 
 
 @app.post("/admin/register-webhook")
