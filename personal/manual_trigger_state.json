@@ -2,7 +2,7 @@
   "local_date": "2026-09-28",
   "context_key": "5dd0a0e991b3566bb0f0",
   "status": "completed",
-  "reason": "telegram:today",
-  "completed_at_utc": "2026-09-27T18:23:26.025710+00:00",
+  "reason": "telegram:report",
+  "completed_at_utc": "2026-09-27T18:23:41.548414+00:00",
   "report_path": "reports/daily_style_report.html"
 }
