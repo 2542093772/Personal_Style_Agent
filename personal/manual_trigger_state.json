@@ -1,8 +1,8 @@
 {
-  "local_date": "2026-09-28",
-  "context_key": "5dd0a0e991b3566bb0f0",
+  "local_date": "2026-10-01",
+  "context_key": "c359da5c301651354ef0",
   "status": "completed",
-  "reason": "telegram:report",
-  "completed_at_utc": "2026-09-27T18:23:41.548414+00:00",
+  "reason": "telegram:today",
+  "completed_at_utc": "2026-09-30T16:01:56.553933+00:00",
   "report_path": "reports/daily_style_report.html"
 }
