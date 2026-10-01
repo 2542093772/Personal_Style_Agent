@@ -1,0 +1,11 @@
+{
+  "run_type": "monthly_personal_review",
+  "timestamp_utc": "2026-10-01T18:42:53.353825+00:00",
+  "feedback_count": 0,
+  "outfit_history_count": 0,
+  "personal_rule_count_before": 0,
+  "personal_rule_count_after": 0,
+  "candidate_rule_count": 0,
+  "policy": "personal_rules_can_be_promoted_or_demoted_here",
+  "personal_rules": []
+}
