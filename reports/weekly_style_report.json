@@ -1,10 +1,10 @@
 {
   "run_type": "weekly_review",
-  "timestamp_utc": "2026-10-18T16:04:33.376431+00:00",
+  "timestamp_utc": "2026-10-25T16:42:00.169721+00:00",
   "trend_batch_count": 0,
   "candidate_rule_count": 0,
   "creator_profile_count": 11,
-  "creator_candidate_count": 35,
+  "creator_candidate_count": 39,
   "new_creator_count": 0,
   "profiled_creator_count": 0,
   "cross_creator_consensus_count": 0,
